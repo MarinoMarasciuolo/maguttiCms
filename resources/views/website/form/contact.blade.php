@@ -33,7 +33,7 @@
         <x-website.ui.input type="email" for="email" placeholder="{{ __('website.email') }} *" required/>
     </div>
     <div class="col-12 col-sm-6">
-        <x-website.ui.input for="company" placeholder="{{ __('website.employer') }} *" required/>
+        <x-website.ui.input for="company" placeholder="{{ __('website.employer') }} " />
     </div>
     <div class="col-12">
         <x-website.ui.input for="subject" placeholder="{{ __('website.subject') }} *" required/>
