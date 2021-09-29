@@ -51,6 +51,6 @@ abstract class WebsiteViewModel
 
     function handle(string $slug)
     {
-        return ($slug == '') ? $this->index() : $this->show($slug);;
+        return ($slug == '') ? $this->index() : $this->show($slug);
     }
 }

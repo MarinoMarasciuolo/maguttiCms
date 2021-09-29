@@ -9,6 +9,7 @@
 
 
 use App\maguttiCms\Website\Controllers\APIController;
+use App\maguttiCms\Website\Controllers\ContactController;
 use App\maguttiCms\Website\Controllers\FaqController;
 use App\maguttiCms\Website\Controllers\NewsController;
 use App\maguttiCms\Website\Controllers\PagesController;
@@ -83,7 +84,7 @@ Route::group(['middleware' => ['localeSessionRedirect', 'localizationRedirect', 
     Route::get(LaravelLocalization::transRoute("routes.products"), [ProductsController::class, 'products']);
 
 
-    Route::get(LaravelLocalization::transRoute("routes.contacts"), [PagesController::class, 'contacts']);
+    Route::get(LaravelLocalization::transRoute("routes.contacts"), ContactController::class);
     Route::post('/contacts/', [WebsiteFormController::class, 'getContactUsForm']);
 
     // store page

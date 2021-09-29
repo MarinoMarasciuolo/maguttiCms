@@ -14,15 +14,15 @@
 
 {{ Form::open(array('action' => '\App\maguttiCms\Website\Controllers\WebsiteFormController@getContactUsForm')) }}
 <div class="row g-3">
-    @if(isset($request_product_id))
-        @if(isset($product))
-            <div class="col-12">
-                    <x-website.ui.input type="hidden" value="{{$request_product_id}}" for="request_product_id" placeholder="{{ __('website.name') }}"/>
-                {!! __('website.message.product_request') !!}
-                <mark>{{$product->title}}</mark>
-            </div>
-        @endif
+
+    @if(isset($product))
+        <div class="col-12">
+                <x-website.ui.input type="hidden" value="{{$product->id}}" for="request_product_id" placeholder="{{ __('website.name') }}"/>
+            {!! __('website.message.product_request') !!}
+            <mark>{{$product->title}}</mark>
+        </div>
     @endif
+
     <div class="col-12 col-sm-6">
         <x-website.ui.input for="name" placeholder="{{ __('website.name') }} *" required/>
     </div>

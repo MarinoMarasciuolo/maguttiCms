@@ -3,13 +3,14 @@
 namespace App\maguttiCms\Domain\Article;
 
 
-use App\Http\Resources\MapLocationResource;
-use App\Location;
-use App\Product;
-use App\maguttiCms\Domain\Website\WebsiteViewModel;
 use Illuminate\View\View;
-use phpDocumentor\Reflection\Types\Mixed_;
 
+use App\maguttiCms\Domain\Website\WebsiteViewModel;
+
+
+/**
+ *
+ */
 class ArticleViewModel extends WebsiteViewModel
 {
 
@@ -39,22 +40,6 @@ class ArticleViewModel extends WebsiteViewModel
         return $this->handleMissingPage();
     }
 
-
-    function contacts() :View
-    {
-        $article = $this->getPage(trans('routes.contacts'));
-        $this->setSeo($article);
-        $parameter = request()->get('product_id');
-
-        $locations = MapLocationResource::collection(Location::query()->wherePub(1)->get());
-
-        if ($parameter && !is_array($parameter)) {
-            $product = Product::findOrFail($parameter);
-            return view('website.contacts', ['request_product_id' => $parameter, 'product' => $product, 'article' => $article,'locations' => $locations]);
-        }
-
-        return view('website.contacts', ['request_product_id' => 0, 'article' => $article, 'locations' => $locations]);
-    }
 
 
     protected function getParentPage($parent)
@@ -106,7 +91,6 @@ class ArticleViewModel extends WebsiteViewModel
     {
         if ($parent == 'home') return $this->index();
         if ($parent == 'intro') return $this->intro();
-        if ($parent == 'contacts') return $this->contacts();
         return $this->show($parent, $child);;
     }
 }
