@@ -1,14 +1,13 @@
-<?php namespace App\maguttiCms\Admin\Controllers;
+<?php
 
-use App\Block;
+namespace App\maguttiCms\Admin\Controllers;
+
 use App\Http\Controllers\Controller;
-
-use App\maguttiCms\Domain\Block\Resources\BlockCollection;
-use App\maguttiCms\Domain\Block\Resources\BlockResource;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Validator;
-
 use Auth;
 
 
@@ -60,9 +59,12 @@ class AdminPagesController extends Controller
 
     /**
      * Show the index list of a model.
-     * @return Response
+     * @param Request $request
+     * @param $model
+     * @param string $sub
+     * @return View
      */
-    public function lista(Request $request, $model, $sub = '')
+    public function lista(Request $request, $model, $sub = ''): View
     {
         $this->request = $request;
         $this->init($model);
@@ -108,7 +110,7 @@ class AdminPagesController extends Controller
      *
      * @param $model
      *
-     * @return Response
+     *
      */
     public function create($model)
     {
@@ -122,12 +124,10 @@ class AdminPagesController extends Controller
     /**
      * Show the form for editing
      * the specified resource.
-     *
      * @param $model
-     * @param  int $id
-     *
-     * @return Response
+     * @param $id
      */
+
     public function edit($model, $id)
     {
         $this->id = $id;
@@ -145,12 +145,13 @@ class AdminPagesController extends Controller
     }
 
     /**
-     * VIEW RESOURCE
+     * View model resource
+     *
      * @param $model
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function view($model, $id)
+    public function view($model, $id) : View
     {
         $this->id = $id;
         $this->init($model);
@@ -167,7 +168,7 @@ class AdminPagesController extends Controller
      * @param $model
      * @param $id
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
      */
     public function editmodal($model, $id)
     {
@@ -183,15 +184,13 @@ class AdminPagesController extends Controller
     }
 
     /**
-     * Store a newly created
-     * resource in storage.
+     * Store a newly created  resource in storage.
      *
-     * @param $model
+     * @param string $section
      * @param AdminFormRequest $request
-     *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store($section, AdminFormRequest $request)
+    public function store(string $section, AdminFormRequest $request): RedirectResponse
     {
         $this->init($section);
         $model = new  $this->modelClass;
@@ -203,16 +202,16 @@ class AdminPagesController extends Controller
         return redirect()->route('admin_edit',['section' =>$this->models, 'id' => $article->id ]);
     }
 
+
     /**
      * Update resource in storage
      *
      * @param $section
-     * @param  int $id
+     * @param int $id
      * @param AdminFormRequest $request
-     *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update($section, $id, AdminFormRequest $request)
+    public function update($section, int $id, AdminFormRequest $request): RedirectResponse
     {
         $this->init($section);
         $article = $this->modelClass::whereId($id)->firstOrFail();
@@ -237,15 +236,15 @@ class AdminPagesController extends Controller
     }
 
 
-    /**
-     * SIMPLE DUPLICATE FUNCTION
-     * FOR NOW DUPLICATE A
-     * RECORD WITHOUT IS
-     * RELATION
-     * @param $model
+     /**
+     *
+     * Simple model duplicate function
+     *
+     * @param $section
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
      */
+
     public function duplicate($section, $id)
     {
         $this->init($section);
@@ -260,7 +259,7 @@ class AdminPagesController extends Controller
      *
      * @param $model
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy($model, $id)
     {
@@ -314,8 +313,8 @@ class AdminPagesController extends Controller
                 'file' => $storage->get($folder . '/' . $object->$key),
                 'mime' => $storage->mimeType($folder . '/' . $object->$key)
             ];
-        } else {
-            return false;
         }
+        return false;
+
     }
 }
