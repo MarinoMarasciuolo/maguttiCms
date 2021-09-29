@@ -50,7 +50,7 @@ class ArticleViewModel extends WebsiteViewModel
 
         if ($parameter && !is_array($parameter)) {
             $product = Product::findOrFail($parameter);
-            return view('website.contacts', ['request_product_id' => $parameter, 'product' => $product, 'article' => $article]);
+            return view('website.contacts', ['request_product_id' => $parameter, 'product' => $product, 'article' => $article,'locations' => $locations]);
         }
 
         return view('website.contacts', ['request_product_id' => 0, 'article' => $article, 'locations' => $locations]);

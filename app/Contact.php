@@ -8,13 +8,13 @@ class Contact extends Model
 {
     //
     protected $fillable = ['request_product_id','name','surname','subject','company','email', 'message', 'status', 'created_by'];
-    protected $fieldspec = [];
+    protected array $fieldspec = [];
 
 	public function product() {
         return $this->belongsTo('App\Product','request_product_id','id');
     }
 
-    function getFieldSpec ()
+    function getFieldSpec () :array
     
     {
         $this->fieldspec['id'] = [

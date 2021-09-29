@@ -2,11 +2,12 @@
 
 namespace App\maguttiCms\Notifications;
 
+use App\Contact;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use phpDocumentor\Reflection\Types\Array_;
+
 
 class ContactRequest extends Notification implements ShouldQueue
 {
@@ -17,9 +18,9 @@ class ContactRequest extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param $data
+     * @param array $data
      */
-    public function __construct( Array $data)
+    public function __construct( array $data)
     {
         //
         $this->data = $data;
@@ -28,10 +29,9 @@ class ContactRequest extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
      * @return array
      */
-    public function via($notifiable): array
+    public function via(): array
     {
         return ['mail'];
     }
@@ -40,13 +40,16 @@ class ContactRequest extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param mixed $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable): MailMessage
     {
+        $this->data['messageLines'] = explode("\n", $this->data['message']);
+
+        $subject = trans('website.mail_message.contact') . ': ' . $this->data['name']. ' ' . $this->data['company'];
 
         return (new MailMessage)
-            ->subject($this->data['mailSubject'])
+            ->subject($subject)
             ->replyTo($this->data['email'])
             ->view(['emails.contact.html', 'emails.contact.plain'], ['data' => $this->data]);
     }
@@ -59,8 +62,6 @@ class ContactRequest extends Notification implements ShouldQueue
      */
     public function toArray($notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

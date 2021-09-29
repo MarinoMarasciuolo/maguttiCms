@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
+use App\maguttiCms\Domain\Contact\Action\NewContactAction;
 use App\maguttiCms\Website\Requests\WebsiteFormRequest;
 use App\maguttiCms\Notifications\ContactRequest;
 use App\FaqCategory;
@@ -22,52 +23,19 @@ class WebsiteFormController extends Controller
      *
      * @param WebsiteFormRequest $request
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function getContactUsForm(WebsiteFormRequest $request)
     {
-        $slug = 'contacts';
-        $this->request = $request;
-        $model = new Contact;
-
-        foreach ($model->getFillable() as $a) {
-            $model->$a = sanitizeParameter($this->request->get($a));
-        }
-        $model->save();
-        $article = Article::where('slug', '=', $slug)->first();
-
-        /****************** send confirm email ***************/
-        $data = $request->only('name', 'surname', 'email', 'company', 'subject', 'request_product_id');
-
-        $data['messageLines'] = explode("\n", $model->message);
-        $data['mailSubject'] = trans('website.mail_message.contact') . ': ' . $model->name . ' ' . $model->company;
-
-        if ($model->request_product_id) {
-            $product_name = Product::where('id', $model->request_product_id)->first();
-            $product_name = $product_name->title;
-        } else {
-            $product_name = "";
-        }
-
-        $data['product'] = $product_name;
-
-
-        Notification::route('mail', config('maguttiCms.website.option.app.email'))
-                      ->notify(new ContactRequest($data));
-
-
-
-        /******************** end email ***********************/
-
+        (new NewContactAction())->handle($request->validated());
         session()->flash('success', trans('website.message.contact_feedback'));
-
         return back();
     }
 
     /**
      *
-     *  File upload  Handlaer
-     *  TODO  to be imporved
+     *  File upload  Handler
+     *  TODO  to be improved
      *
      * @param $model
      * @param $media

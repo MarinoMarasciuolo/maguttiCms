@@ -8,7 +8,8 @@ return [
 			'message' => 'required',
 			'privacy' => 'required',
 			'email'   => 'required|Between:3,64|Email',
-			'request_product_id' => 'exists:products,id',
+			'request_product_id' => 'sometimes|exists:products,id',
+			'company' => 'nullable|string',
             'g-recaptcha-response'=>'sometimes|required|recaptcha'
 		],
 

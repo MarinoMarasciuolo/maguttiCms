@@ -17,7 +17,7 @@
     @if(isset($request_product_id))
         @if(isset($product))
             <div class="col-12">
-				<x-website.ui.input type="hidden" for="request_product_id" placeholder="{{ __('website.name') }}"/>
+                    <x-website.ui.input type="hidden" value="{{$request_product_id}}" for="request_product_id" placeholder="{{ __('website.name') }}"/>
                 {!! __('website.message.product_request') !!}
                 <mark>{{$product->title}}</mark>
             </div>
