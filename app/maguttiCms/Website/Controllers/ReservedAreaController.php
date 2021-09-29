@@ -5,6 +5,8 @@ namespace App\maguttiCms\Website\Controllers;
 
 use App\maguttiCms\Domain\Store\Facades\StoreFeatures;
 use Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Input;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -23,13 +25,13 @@ class ReservedAreaController extends Controller
 {
 	use MaguttiCmsSeoTrait;
     /**
-     * @var
+     * @string
      */
-    protected  $template;
+    protected  string $template;
     /**
      * @var ArticleRepositoryInterface
      */
-    protected  $articleRepo;
+    protected ArticleRepositoryInterface $articleRepo;
 
 
     /**
@@ -43,9 +45,9 @@ class ReservedAreaController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|\Illuminate\View\View
      */
-    public function dashboard()
+    public function dashboard() : View
     {
         $article =$this->articleRepo->getBySlug('dashboard');
         $this->setSeo($article);
@@ -58,7 +60,7 @@ class ReservedAreaController extends Controller
     }
 
 
-    public function profile()
+    public function profile() :View
     {
 
         $article =$this->articleRepo->getBySlug('profile');
@@ -66,7 +68,7 @@ class ReservedAreaController extends Controller
         return view('website.users.profile', compact('article'));
     }
 
-    public function update_profile(UpdateUserProfileRequest $request)
+    public function update_profile(UpdateUserProfileRequest $request) :View
     {
         $validated = $request->validated();
         auth_user()->update($validated);
