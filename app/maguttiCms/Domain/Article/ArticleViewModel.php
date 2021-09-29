@@ -61,7 +61,7 @@ class ArticleViewModel extends WebsiteViewModel
     {
 
         $page = $this->getPage($parent, app()->getLocale());
-        // Return false if page has parent because this method is used only for parent page
+        // Return false if page has parented because this method is used only for parent page
         return ($page && $page->parent_id != 0) ? false : $page;
 
     }
