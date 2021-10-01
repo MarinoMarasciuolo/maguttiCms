@@ -13,17 +13,17 @@ class ContactRequest extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public array $data;
+
+    private Contact $contact;
 
     /**
      * Create a new notification instance.
      *
-     * @param array $data
+     * @param Contact $contact
      */
-    public function __construct( array $data)
+    public function __construct(Contact $contact)
     {
-        //
-        $this->data = $data;
+        $this->contact = $contact;
     }
 
     /**
@@ -44,14 +44,13 @@ class ContactRequest extends Notification implements ShouldQueue
      */
     public function toMail($notifiable): MailMessage
     {
-        $this->data['messageLines'] = explode("\n", $this->data['message']);
 
-        $subject = trans('website.mail_message.contact') . ': ' . $this->data['name']. ' ' . $this->data['company'];
+        $subject = trans('website.mail_message.contact') . ': ' . $this->contact->name. ' ' . $this->contact->company;
 
         return (new MailMessage)
             ->subject($subject)
-            ->replyTo($this->data['email'])
-            ->view(['emails.contact.html', 'emails.contact.plain'], ['data' => $this->data]);
+            ->replyTo($this->contact->email)
+            ->view(['emails.contact.html', 'emails.contact.plain'], ['contact' => $this->contact]);
     }
 
     /**

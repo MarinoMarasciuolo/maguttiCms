@@ -2,19 +2,14 @@
 @section('content')
 	<p>{{ trans('website.mail_message.contact')}}:</p>
 	<ul>
-		<li><b>{{ trans('website.name')}}</b>: {{ $data['name'] }} {{ $data['surname'] }}</li>
-		<li><b>{{ trans('website.employer')}}</b>: {{ $data['company'] }}</li>
-		<li><b>{{ trans('website.email')}}</b>: {{ $data['email'] }}</li>
-		@if ($data['product'])
-			<li><b>Info request from product</b>: {{ $data['product'] }}</li>
-		@endif
+		<li><b>{{ trans('email.contact.name')}}</b>: {{ $contact->full_name }}</li>
+		<li><b>{{ trans('email.contact.company')}}</b>: {{ $contact->company }}</li>
+		<li><b>{{ trans('email.contact.email')}}</b>: {{ $contact->email }}</li>
 	</ul>
-	<br />
-	<p>
-		<b>{{ trans('website.message_email')}}</b></p>
-	    <p>
-		@foreach ($data['messageLines'] as $messageLine)
-			{{ $messageLine }}<br>
-		@endforeach
-	</p>
+	@if ($contact->product)
+		<h5>{{ trans('email.contact.product') }}</h5>
+		<p>{{ $contact->product->title }}</p>
+	@endif
+	<h5>{{ trans('email.contact.message')}}</h5>
+	<p>{!!nl2br($contact->message)!!}</p>
 @endsection
