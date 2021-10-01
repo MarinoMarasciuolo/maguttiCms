@@ -3,8 +3,8 @@
 namespace App\maguttiCms\Rules;
 
 use App\maguttiCms\Tools\SettingHelper;
-use GuzzleHttp\Client;
 use Illuminate\Contracts\Validation\Rule;
+
 
 class GoogleRecaptcha implements Rule
 {
@@ -15,9 +15,7 @@ class GoogleRecaptcha implements Rule
      */
     public function __construct()
     {
-        //
     }
-
 
     /**
      * Determine if the validation rule passes.
@@ -28,20 +26,39 @@ class GoogleRecaptcha implements Rule
      */
     public function passes($attribute, $value)
     {
-        $client = new Client();
-        $response = $client->post('https://www.google.com/recaptcha/api/siteverify',
-            [
-                'form_params' => [
-                    'secret' => SettingHelper::getOption('captcha_secret'),
-                    'remoteip' => request()->getClientIp(),
-                    'response' => $value
-                ]
-            ]
-        );
-        $body = json_decode((string)$response->getBody());
-        return $body->success;
-    }
+        if (SettingHelper::getOption('captcha_site')) {
+            // controllo google reCAPTCHA
+            $url = 'https://www.google.com/recaptcha/api/siteverify';
+            $data = [
+                'secret' => SettingHelper::getOption('captcha_secret'),
+                'response' => $value,
+                'remoteip' => request()->getClientIp()
+            ];
 
+            // use key 'http' even if you send the request to https://...
+            $options = array(
+                'http' => array(
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method' => 'POST',
+                    'content' => http_build_query($data)
+                )
+            );
+            $context = stream_context_create($options);
+            $result = json_decode(file_get_contents($url, false, $context));
+
+            dd($result);
+            if (
+                !$result
+                || !$result->success
+                || $result->score < 0.5
+                || $result->action != request()->get('captcha_action')
+            ) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     /**
      * Get the validation error message.
@@ -50,6 +67,6 @@ class GoogleRecaptcha implements Rule
      */
     public function message()
     {
-        return 'Are you a robot?';
+        return trans('validation.recaptcha');
     }
 }

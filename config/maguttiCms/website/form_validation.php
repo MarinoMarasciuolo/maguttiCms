@@ -10,7 +10,7 @@ return [
 			'email'   => 'required|Between:3,64|Email',
 			'request_product_id' => 'sometimes|exists:products,id',
 			'company' => 'nullable|string',
-            'g-recaptcha-response'=>'sometimes|required|recaptcha'
+            //'captcha_token' => 'required|recaptcha'
 		],
 
 		'newsletter' => [

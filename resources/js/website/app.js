@@ -119,8 +119,57 @@ window.App = function () {
 					}
 				});
 			});
+		},
+
+		// key: google recaptcha api key
+		// action: google recaptcha action identifier (contact, newsletter, comment...)
+		// id: jquey selector for the HtmlFormElement
+		validateCaptcha: function(key, action, id) {
+			var can_submit = false;
+			var is_adding_captcha = false;
+			let form = $(id);
+
+			form.on('submit', (e) => {
+				if (is_adding_captcha) {
+					return false;
+				}
+
+				if (can_submit) {
+					return true;
+				}
+
+				e.preventDefault();
+
+				// delete previous recaptcha valeus
+				form.find('input[name="captcha_token"]').remove();
+				form.find('input[name="captcha_action"]').remove();
+
+				// validate the form client-side
+				if (form.get(0).reportValidity()) {
+					is_adding_captcha = true;
+
+					// ask recaptcha for a validation token
+					grecaptcha.ready(function() {
+						grecaptcha
+							.execute(key, {
+								action: action
+							})
+							.then(function(token) {
+								can_submit = true;
+								is_adding_captcha = false;
+
+								// append the recaptcha token to the form and submit
+								form.append('<input type="hidden" name="captcha_token" value="' + token + '">')
+									.append('<input type="hidden" name="captcha_action" value="' + action + '">')
+									.trigger('submit');
+							});
+					});
+				}
+			});
 		}
 	};
+
+
 }();
 
 

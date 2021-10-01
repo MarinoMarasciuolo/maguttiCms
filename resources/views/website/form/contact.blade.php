@@ -8,11 +8,15 @@
     @if ($errors->any())
         <x-ui.alert  class='alert-danger alert-dismissible d-flex align-items-center'>
             {{icon('times-circle', 'fa-2x flex-shrink-0 me-2')}}
-            <div>{{__('website.message.please_fill_all_required_field')}}</div>
+            <div>
+            @foreach ( $errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+            </div>
         </x-ui.alert>
     @endif
 
-{{ Form::open(array('action' => '\App\maguttiCms\Website\Controllers\WebsiteFormController@getContactUsForm')) }}
+{{ Form::open(['id' => 'form-contact', 'action' => '\App\maguttiCms\Website\Controllers\WebsiteFormController@getContactUsForm']) }}
 <div class="row g-3">
 
     @if(isset($product))
@@ -44,16 +48,26 @@
     <div class="col-12 col-sm-12">
         <x-website.widgets.privacy-message/>
     </div>
-    @if (data_get($site_settings,'captcha_site'))
-        <div class="col-12 col-sm-6">
-            <div class="pull-end">
-                <div class="g-recaptcha" data-sitekey="{{data_get($site_settings,'captcha_site')}}"></div>
-            </div>
-        </div>
-    @endif
+
     <div class="col-12 col-sm-6 ">
 		<button type="submit" class="btn btn-primary">{{ __('website.send') }}</button>
     </div>
 </div>
 {{ Form::close() }}
 @endif
+
+@section('headerjs')
+    @parent
+    @include('website.partials.widgets_captcha')
+@endsection
+
+@section('footerjs')
+    @parent
+    @if (data_get($site_settings,'captcha_site'))
+        <script>
+            $(function() {
+                App.validateCaptcha('{{data_get($site_settings,'captcha_site')}}', 'contact', '#form-contact');
+            });
+        </script>
+    @endif
+@endsection
