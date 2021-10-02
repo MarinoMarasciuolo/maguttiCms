@@ -83,7 +83,6 @@ class Discount extends Model
         $this->fieldspec['type'] = [
             'type'        => 'relation',
             'model'       => 'Domain',
-            'filter'      => ['domain' => 'template'],
             'foreign_key' => 'value',
             'label_key'   => 'title',
             'filter'      =>  ['domain' => 'discount'],

@@ -26,7 +26,7 @@ class Cart extends Model
 
     protected $appends = ['discount_amount','discount_type','discount_label'];
 
-    public $sluggable = [];
+    public array $sluggable = [];
 
 
     public function getRouteKeyName()
@@ -85,9 +85,7 @@ class Cart extends Model
     public function order()
     {
         return $this->hasOne('App\Order');
-
     }
-
 
 
     /*

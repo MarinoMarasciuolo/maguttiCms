@@ -10,6 +10,8 @@ use App\maguttiCms\Domain\Media\Mediable;
 use App\maguttiCms\Domain\Block\Blockable;
 use App\maguttiCms\Builders\ArticleBuilder;
 use \App\maguttiCms\Domain\Article\ArticlePresenter;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -20,9 +22,7 @@ class Article extends Model
 {
     use Translatable;
     use GFTranslatableHelperTrait;
-
     use Blockable;
-
     use Mediable;
     use ArticlePresenter;
 
@@ -59,17 +59,17 @@ class Article extends Model
     |  RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function template(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function template(): BelongsTo
     {
         return $this->belongsTo('App\Domain', 'template_id', 'id');
     }
 
-    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function parent(): BelongsTo
     {
         return $this->belongsTo('App\Article', 'parent_id', 'id');
     }
 
-    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function children(): HasMany
     {
         return $this->hasMany('App\Article', 'parent_id', 'id');
     }

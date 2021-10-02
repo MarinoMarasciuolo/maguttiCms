@@ -93,5 +93,4 @@ class Domain extends Model
         ];
         return $this->fieldspec;
     }
-
 }

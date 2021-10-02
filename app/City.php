@@ -16,6 +16,6 @@ class City extends Model
 
 	public function province()
 	{
-		return $this->belongsTo('App/Province', 'provinc_code', 'code');
+		return $this->belongsTo('App/Province', 'province_code', 'code');
 	}
 }

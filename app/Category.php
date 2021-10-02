@@ -2,6 +2,7 @@
 
 use App\maguttiCms\Builders\MaguttiCmsBuilder;
 use App\maguttiCms\Builders\ProductBuilder;
+use App\maguttiCms\Domain\Category\CategoryPresenter;
 use Illuminate\Database\Eloquent\Model;
 use App\maguttiCms\Translatable\GFTranslatableHelperTrait;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -12,7 +13,7 @@ class Category extends Model
 {
     use Translatable;
     use GFTranslatableHelperTrait;
-    use \App\maguttiCms\Domain\Category\CategoryPresenter;
+    use CategoryPresenter;
 
     protected $with = ['translations'];
 

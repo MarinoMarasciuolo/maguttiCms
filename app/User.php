@@ -3,6 +3,7 @@
 namespace App;
 
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\maguttiCms\Notifications\UserResetPasswordNotification as UserResetPasswordNotification;
@@ -66,7 +67,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Order');
     }
 
-    public function carts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function carts(): HasMany
     {
         return $this->hasMany('App\Cart');
     }

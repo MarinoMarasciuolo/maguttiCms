@@ -26,7 +26,6 @@ class Country extends Model
     |--------------------------------------------------------------------------
     */
     public function getFieldSpec (): array
-
     {
        
         $this->fieldspec['id'] = [
