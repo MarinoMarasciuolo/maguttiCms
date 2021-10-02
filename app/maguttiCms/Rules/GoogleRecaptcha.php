@@ -46,7 +46,6 @@ class GoogleRecaptcha implements Rule
             $context = stream_context_create($options);
             $result = json_decode(file_get_contents($url, false, $context));
 
-            dd($result);
             if (
                 !$result
                 || !$result->success
