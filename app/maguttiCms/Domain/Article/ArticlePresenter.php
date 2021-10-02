@@ -53,19 +53,17 @@ trait ArticlePresenter
      *
      * @return mixed
      */
-    function getNavTitleAttribute()
+    function getNavTitleAttribute() : string
     {
         return ($this->menu_title)
-                    ?
-                    : $this->title;
+            ?: $this->title;
     }
 
 
-    function getBtnTitleAttribute()
+    function getBtnTitleAttribute() :string
     {
         return ($this->menu_title)
-                    ?
-                    : $this->sub_title;
+            ?: $this->sub_title;
     }
 
 
