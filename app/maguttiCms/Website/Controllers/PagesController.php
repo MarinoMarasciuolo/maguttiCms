@@ -19,9 +19,4 @@ class PagesController extends Controller
     {
         return (new ArticleViewModel())->handle($parent, $child);
     }
-
-    public function contacts()
-    {
-        return (new ArticleViewModel())->handle('contacts');
-    }
 }
