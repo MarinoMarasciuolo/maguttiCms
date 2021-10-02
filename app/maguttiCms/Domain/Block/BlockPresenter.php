@@ -12,7 +12,7 @@ trait BlockPresenter
      *
      * @return mixed
      */
-        function getBtnTitleAttribute(): string
+        function getBtnTitleAttribute(): mixed
         {
 
             return ($this->title)

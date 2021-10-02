@@ -12,7 +12,7 @@ class NewsBuilder extends MaguttiCmsBuilder
      * @param int $limit
      * @return mixed
      */
-    public function latestPublished($limit = 5)
+    public function latestPublished(int $limit = 5)
     {
         return $this->published()->translatedContent()->latest('date')->limit($limit);
     }

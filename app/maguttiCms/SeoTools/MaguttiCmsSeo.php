@@ -11,24 +11,24 @@ use Illuminate\Support\Str;
 
 trait MaguttiCmsSeoTrait
 {
-    protected $title;
-    protected $image;
+    protected string $title;
+    protected string $image;
     protected $model;
-    protected $url;
-    protected $query_strings = ['page'];
+    protected string $url;
+    protected array $query_strings = ['page'];
 
     public static function bootMaguttiCmsSeoTrait()
     {
         static::created(function ($item) {
-            // Index the itemcompo
+
         });
     }
 
-    public function setSeo($model)
+    public function setSeo($model): self
     {
         $this->model = $model;
         $this->image = asset('website/images/logo-share.jpg');
-        if($this->model ){
+        if ($this->model) {
             $this->setTitle();
             $this->setDescription();
             $this->setOpenGraphImages();
@@ -41,7 +41,7 @@ trait MaguttiCmsSeoTrait
         return $this;
     }
 
-    public function setPagination($model)
+    public function setPagination($model): void
     {
         $prev_url = preg_replace('/\?page=[1]$/', '', $model->previousPageUrl());
         $next_url = preg_replace('/\?page=[1]$/', '', $model->nextPageUrl());
@@ -58,7 +58,7 @@ trait MaguttiCmsSeoTrait
         }
     }
 
-    public function setTitle()
+    public function setTitle(): void
     {
         $this->title = $this->tagHandler('title');
         if ($this->title == '') {
@@ -67,27 +67,26 @@ trait MaguttiCmsSeoTrait
         SEO::setTitle($this->title);
     }
 
-    public function setDescription()
+    public function setDescription(): void
     {
         SEO::setDescription(Str::limit($this->tagHandler('description'), config('seotools.lara_setting.description')));
     }
 
-    public function setNoIndex()
+    public function setNoIndex(): void
     {
         if (data_get($this->model, 'seo_no_index')) {
             SEO::metatags()->addMeta('robots', 'noindex');
         }
     }
 
-    public function setCanonical()
+    public function setCanonical(): void
     {
-
         $this->url = ($this->allowedQueryStrings()) ? Request::fullUrl() : Request::url();
 
         SEO::setCanonical($this->url);
     }
 
-    public function setOpenGraphImages()
+    public function setOpenGraphImages(): void
     {
         $image_conf = config('maguttiCms.image.social');
         $fieldspec = $this->model->getFieldspec();
@@ -103,12 +102,12 @@ trait MaguttiCmsSeoTrait
         SEO::twitter()->addValue('image', $this->image);
     }
 
-    public function addOpenGraphProperty($property, $value)
+    public function addOpenGraphProperty($property, $value): void
     {
         SEO::opengraph()->addProperty($property, $value);
     }
 
-    public function addAlternate()
+    public function addAlternate(): self
     {
         // Add alternate url only when the website has more than one language
         if (count(LaravelLocalization::getSupportedLocales()) > 1) {
@@ -125,28 +124,23 @@ trait MaguttiCmsSeoTrait
                     SEOMeta::addAlternateLanguage($localeCode, $url);
                 }
             }
-
         }
 
         return $this;
     }
 
-    protected function tagHandler($tag)
+    protected function tagHandler($tag) :mixed
     {
-
-
         return (optional($this->model)->{'seo_' . $tag} != '') ? $this->model->{'seo_' . $tag} : optional($this->model)->{$tag};
     }
 
     protected function allowedQueryStrings()
     {
-
         return !empty(request()->only($this->query_strings));
     }
 
-    public function setAllowedQueryStrings($string)
+    public function setAllowedQueryStrings($string): void
     {
-
         $this->query_strings[] = $string;;
     }
 }

@@ -44,7 +44,7 @@ class Button extends BaseWidget
         return view('components.website.ui.button');
     }
 
-    public function getLink(): string
+    public function getLink()
     {
         if (Str::startsWith($this->item->link, ['http', 'https'])) return $this->item->link;
 
@@ -53,7 +53,7 @@ class Button extends BaseWidget
             : page_permalink_by_id($this->item->link);
     }
 
-    public function getLabel(): string
+    public function getLabel(): mixed
     {
         return $this->label ?? $this->item->btn_title;
     }
