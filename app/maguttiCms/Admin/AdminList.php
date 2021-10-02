@@ -6,8 +6,8 @@ namespace App\maguttiCms\Admin;
 use App\maguttiCms\Admin\Decorators\AdminListComponentTrait;
 use App\maguttiCms\Admin\Helpers\AdminListAction;
 use Carbon\Carbon;
-Use Form;
-Use App;
+use Form;
+use App;
 use Illuminate\Support\Str;
 
 
@@ -18,7 +18,6 @@ use App\maguttiCms\Admin\Decorators\AdminListSortableHeader;
  * Class AdminList
  * @package App\maguttiCms\Admin
  */
-
 class AdminList implements AdminListInterface
 {
 
@@ -53,13 +52,12 @@ class AdminList implements AdminListInterface
 
     public function getListHeader()
     {
-        $html = '';
-        $html .= $this->getSelectAbleHeader();
+        $html = $this->getSelectAbleHeader();
         $nF = 0; //  field number
 
         foreach ($this->authorized_fields as $_code => $_item) {
-            if(!$this->isGroupBySeparator($_item)){
-                $html .= "<th class=\"middle-vertical-align ".data_get($_item,'class','')."\">\n";
+            if (!$this->isGroupBySeparator($_item)) {
+                $html .= "<th class=\"middle-vertical-align " . data_get($_item, 'class', '') . "\">\n";
                 $html .= $this->getHeaderItemLabel($_item, $_code);
                 $html .= $this->getOrderableField($_code);
                 $html .= "</th>\n";
@@ -87,13 +85,16 @@ class AdminList implements AdminListInterface
     /**
      * @return string
      */
-    protected function getSelectAbleHeader()
+    protected function getSelectAbleHeader() :string
     {
-        return (auth_user('admin')->action('selectable',$this->property)) ?
-            "<th class=\"selectable-column\"></th>\n" : '';
+        return (auth_user('admin')->action('selectable', $this->property))
+            ? "<th class=\"selectable-column\"></th>\n"
+            : '';
     }
-    function authorizedFields(){
-        return $this->authorized_fields= cmsUserValidateActionRoles($this->property['field']);
+
+    function authorizedFields()
+    {
+        return $this->authorized_fields = cmsUserValidateActionRoles($this->property['field']);
     }
 
 }

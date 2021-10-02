@@ -974,7 +974,6 @@ return [
             ],
             'roles' => ['su']
         ],
-
         'paymentmethods' => [
             'model' => 'PaymentMethod',
             'title' => 'Payment Methods',
@@ -1014,7 +1013,6 @@ return [
             ],
             'roles' => ['su']
         ],
-
         'shipmentmethods' => [
             'model' => 'ShipmentMethod',
             'title' => 'Shipping Methods',
@@ -1054,7 +1052,6 @@ return [
             ],
             'roles' => ['su']
         ],
-
         'discounts' => [
             'model' => 'Discount',
             'title' => 'Discount',
@@ -1097,7 +1094,6 @@ return [
             ],
             'roles' => ['su', 'admin']
         ],
-
         'adminusers' => [
             'model' => 'AdminUser',
             'icon' => 'users',
@@ -1180,7 +1176,6 @@ return [
             ],
             'roles' => ['su']
         ],
-
         'provinces' => [
             'model' => 'Province',
             'icon' => 'flag',
@@ -1383,6 +1378,125 @@ return [
                 'top-bar' => [
                     'show' => true,
                     'action' => ['add']
+                ],
+            ],
+            'roles' => ['su', 'admin', 'user']
+        ],
+
+        'custom_resources' => [
+            'model' => 'Example',
+            'title' => 'Custom Items',
+            'icon' => 'graduation-cap',
+            'section' =>'example',
+            'extra_url'=>'custom_resources',
+            'field' => [
+                'id',
+                'date' => ['type' => 'text', 'field' => 'date', 'orderable' => true],
+                'article' => ['type' => 'relation', 'relation' => 'article', 'field' => 'title'],
+                'article_2' => [
+                    'type' => 'relation',
+                    'relation' => 'article_2',
+                    'field' => 'title',
+                    'orderable' => true,
+                    'order_field' => 'article_translations.title',
+                    'roles' => ['su', 'admin']
+                ],
+                'image' => ['type' => 'image', 'field' => 'image'],
+                //'image_media_id' => ['type' => 'relation_image', 'relation' => 'imageMedia', 'field' => 'file_name'],
+                'title' => ['type' => 'text', 'field' => 'title', 'orderable' => true],
+                'slug' => ['type' => 'text', 'field' => 'slug', 'orderable' => true, 'order_field' => 'article_translations.title'],
+                'pub' => ['type' => 'boolean', 'field' => 'pub', 'orderable' => true, 'editable' => false],
+                'sort' => ['type' => 'editable', 'field' => 'sort', 'orderable' => true],
+
+                'created_at' => ['type' => 'date', 'field' => 'created_at', 'orderable' => true],
+                'updated_at' => ['type' => 'date', 'field' => 'updated_at', 'orderable' => true],
+            ],
+            'field_searchable' => [
+                /*
+                * This is the 'relation' version which builds a dropdown input for the corresponding relation.
+                * It should be only used when there are only a few records to show.
+                */
+                'article_id' => [
+                    'label' => 'article',
+                    'type' => 'relation',
+                    'model' => 'article',
+                    'relation' => 'article',
+                    'value' => 'id',
+                    'field' => 'title',
+                    'where' => '1 = 1',
+                    'cssClass' => 'selectize',
+                ],
+                /**
+                 * This is the 'suggest' version which builds a dropdown handled by select 2 for the corresponding relation.
+                 * It should be used when there are a lot of records to filter.
+                 */
+                'article_2_id' => [
+                    'label' => 'article_2',
+                    'type' => 'suggest',
+                    'model' => 'article',
+                    'value' => 'id',
+                    'caption' => 'title',
+                    'is_accessor' => 0,
+                    'where' => '1 = 1',
+                    'roles' => ['su', 'admin']
+                ],
+                //'date'   => ['type' => 'date', 'label' => 'date_format', 'field' => 'date'],
+                'from_date' => ['type' => 'date_range', 'label' => 'data_from', 'field' => 'date', 'class' => 'col-6 col-sm-1'],
+                'to_date' => ['type' => 'date_range', 'label' => 'data_to', 'field' => 'date', 'class' => 'col-6 col-sm-1'],
+                'title' => ['type' => 'text', 'label' => 'title', 'field' => 'title'],
+                'slug' => ['type' => 'text', 'label' => 'slug', 'field' => 'slug'],
+                'sort' => ['type' => 'number', 'label' => 'sort', 'field' => 'sort', 'mode' => 'strict'],
+            ],
+            'field_exportable' => [
+                'id' => ['type' => 'integer', 'field' => 'id', 'label' => 'id'],
+                'parent' => ['type' => 'relation', 'relation' => 'parent', 'field' => 'title', 'label' => 'parent'],
+                'title' => ['type' => 'text', 'label' => 'Title', 'field' => 'title'],
+                'slug' => ['type' => 'text', 'label' => 'Slug', 'field' => 'slug'],
+                'sort' => ['type' => 'text', 'label' => 'Sort', 'field' => 'sort'],
+            ],
+            'joinTable' => "article_translations",
+            'foreignJoinKey' => 'article_id',
+            'localJoinKey' => 'id',
+            'joinFields' => ['article_translations.id as trans_id'],
+            'whereFilter' => 'article_translations.locale="en" ',
+            'orderBy' => 'article_translations.title,sort',
+            'orderType' => 'ASC',
+            'withRelation' => ['media'],
+            'actions' => [
+                'edit' => 0,
+                'selectable' => ['roles' => ['su', 'admin']],
+            ],
+            'viewTemplate' => 'admin.views.example',
+            'showMedia' => 1,
+            'showMediaCropper' => 1,
+            'mediaCropper' => [
+                'width' => 400,
+                'height' => 400,
+                'ratio' => 1,
+                'fill' => 'transparent',
+                'format' => 'jpeg',
+                'extension' => 'jpg'
+            ],
+            'menu' => [
+                'home' => false,
+                'top-bar' => [
+                    'show' => false,
+
+                ],
+            ],
+            'roles' => ['su', 'admin', 'user']
+        ],
+        'custom_url ' => [
+            'title' => 'Magutti.com',
+            'icon' => 'share-alt',
+            'extra_url' => 'https://magutti.com/',
+            'target_url' => '_new',
+            'section' => ' ',
+
+            'menu' => [
+                'home' => true,
+                'top-bar' => [
+                    'show' => true,
                 ],
             ],
             'roles' => ['su', 'admin', 'user']

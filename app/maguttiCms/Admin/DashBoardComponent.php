@@ -3,25 +3,14 @@
 use App;
 use App\maguttiCms\Domain\Store\Facades\StoreHelper;
 use Form;
+use Illuminate\Support\Collection;
 
 
 /**
- * Class AdminTree
- * @package App\maguttiCms\Admin
+ *
  */
-class DashBoardComponent  {
-
-    protected $data;
-    protected $request;
-    protected $config;
-
-    public function __construct($request)
-    {
-        $this->request = $request;
-        $this->config = config('maguttiCms.admin.list');
-        $this->data = collect();
-        $this->init();
-    }
+class DashBoardComponent extends NavigationBaseComponent
+{
 
     public function init()
     {
@@ -32,39 +21,47 @@ class DashBoardComponent  {
             'target' => "_new",
             'footer_url' => url()->to(''),
             'footer_icon' => 'fas fa-external-link-alt',
-            'section' =>'See website'
+            'section' => 'See website'
         ]);
     }
 
 
-    function getData(){
-        foreach ($this->getDashBoardItems() as $_code => $section) {
-            $modelClass = 'App\\' . $section['model'];
-            $model = new $modelClass;
+    function getData() : Collection
+    {
+        $this->init();
+        foreach ($this->getMenuItems('menu.home') as $_code => $section) {
+            $model = $this->resolveModelObject($section);
             $this->data->push([
-                'title' => (\Lang::has('admin.models.' . $_code)) ? trans('admin.models.' . $_code) : ucwords($_code),
-                'model' => $section['model'],
-                'url' => ma_get_admin_list_url($section['model']),
+                'title' => $this->getLabel($_code, $section),
+                'model' => $this->getAttribute($section, 'model'),
+                'url' => $this->resolveUrl($section),
                 'iconClass' => 'fas fa-' . $section['icon'],
-                'pills' => $model::count(),
-                'footer_url' => (data_get($section['actions'],'create'))? ma_get_admin_create_url($section['model']):'',
-                'target' => null,
-                'total' => $this->getTotalAmount($section,$model),
-                'section' =>data_get($section,'section','cms')
+                'pills' => $this->getPillsContent($model),
+                'footer_url' => (data_get($section, 'actions.create')) ? ma_get_admin_create_url($section['model']) : '',
+                'target' => $this->getAttribute($section, 'target_url'),
+                'total' => $this->getTotalAmount($section, $model),
+                'section' => $this->getAttribute($section, 'section', 'cms')
             ]);
         }
         return $this->data;
     }
 
-    function getDashBoardItems(){
-        return collect($this->config['section'])->where('menu.home')->filter(
-            function ($section) {
-                return auth_user('admin')->canViewSection($section);
-            }
-        );
+    function getTotalAmount($section, $model)
+    {
+        return (data_get($section, 'total')) ? StoreHelper::formatPrice($model::sum(data_get($section, 'total'))) : null;
     }
 
-    function getTotalAmount($section,$model){
-      return (data_get($section,'total'))?StoreHelper::formatPrice($model::sum(data_get($section,'total'))):null;
+    function resolveModelObject($section)
+    {
+        return ($this->getAttribute($section, 'model'))
+            ? new ('App\\' . $section['model'])
+            : null;
+    }
+
+    function getPillsContent($model)
+    {
+        return (is_object($model))
+            ? $model::count()
+            : null;
     }
 }
