@@ -125,8 +125,8 @@ window.App = function () {
 		// action: google recaptcha action identifier (contact, newsletter, comment...)
 		// id: jquey selector for the HtmlFormElement
 		validateCaptcha: function(key, action, id) {
-			var can_submit = false;
-			var is_adding_captcha = false;
+			let can_submit = false;
+			let is_adding_captcha = false;
 			let form = $(id);
 
 			form.on('submit', (e) => {
@@ -147,7 +147,6 @@ window.App = function () {
 				// validate the form client-side
 				if (form.get(0).reportValidity()) {
 					is_adding_captcha = true;
-
 					// ask recaptcha for a validation token
 					grecaptcha.ready(function() {
 						grecaptcha
