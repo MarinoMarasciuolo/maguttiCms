@@ -20,6 +20,7 @@ return [
         'block'		    => 'Page Blocks',
         'btn_no'        => 'No',
         'btn_yes'       => 'Yes',
+        'btn_link'      => 'Button Link (eg https://www.magutti.com or a pages id )',
         'cancel'        => 'Cancel',
 		'category'		=> 'Category',
         'city'          => 'City',

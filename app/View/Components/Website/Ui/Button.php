@@ -4,6 +4,7 @@ namespace App\View\Components\Website\Ui;
 
 
 use App\View\Components\Website\Widgets\BaseWidget;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use phpDocumentor\Reflection\Types\Void_;
@@ -26,9 +27,9 @@ class Button extends BaseWidget
      *
      * @return void
      */
-    public function __construct($item=null,$route=null,$label=null)
+    public function __construct($item = null, $route = null, $label = null)
     {
-        $this->item  = $item;
+        $this->item = $item;
         $this->route = $route;
         $this->label = $label;
     }
@@ -38,19 +39,23 @@ class Button extends BaseWidget
      *
      * @return \Illuminate\View\View|string
      */
-    public function render() :View
+    public function render(): View
     {
         return view('components.website.ui.button');
     }
 
     public function getLink(): string
     {
-        return ($this->route)?route($this->route):page_permalink_by_id($this->item->link);
+        if (Str::startsWith($this->item->link, ['http', 'https'])) return $this->item->link;
+
+        return ($this->route)
+            ? route($this->route)
+            : page_permalink_by_id($this->item->link);
     }
 
-    public function getLabel() :string
+    public function getLabel(): string
     {
-       return $this->label ?? $this->item->btn_title;
+        return $this->label ?? $this->item->btn_title;
     }
 
 }

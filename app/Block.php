@@ -168,7 +168,7 @@ class Block extends Model
             'type'     => 'string',
             'required' => 0,
             'hidden'   => 0,
-            'label'    => trans('admin.label.ext_url'),
+            'label'    => __('admin.label.btn_link'),
             'display'  => 1,
         ];
         $this->fieldspec['image'] = [
