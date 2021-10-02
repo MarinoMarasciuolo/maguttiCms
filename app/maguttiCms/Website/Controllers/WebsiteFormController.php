@@ -27,7 +27,8 @@ class WebsiteFormController extends Controller
      */
     public function getContactUsForm(WebsiteFormRequest $request)
     {
-        (new NewContactAction())->handle($request->validated());
+        $validated = $request->safe();  // get an instance of Illuminate\Support\ValidatedInput.
+        (new NewContactAction())->handle($validated->all());// pass all the validated fields
         session()->flash('success', trans('website.message.contact_feedback'));
         return back();
     }
