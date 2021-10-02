@@ -7,7 +7,7 @@ use Input;
 
 class WebsiteFormRequest extends FormRequest
 {
-    protected $model; /*************  cur model to validate **************/
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,8 +27,8 @@ class WebsiteFormRequest extends FormRequest
     public function rules()
     {
         $segments = $this::segments();
-        $this->model= end( $segments  ) ;
-        $rules =  config('maguttiCms.website.form_validation.'.$this->model);
-        return $rules;
+        $model_name= end( $segments  ) ;
+        return config('maguttiCms.website.form_validation.'.$model_name);
+
     }
 }

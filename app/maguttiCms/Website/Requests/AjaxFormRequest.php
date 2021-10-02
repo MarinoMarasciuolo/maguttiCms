@@ -8,7 +8,7 @@ use Validator;
 
 class AjaxFormRequest extends FormRequest
 {
-    protected $model; /*************  cur model to validate **************/
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +28,7 @@ class AjaxFormRequest extends FormRequest
     public function rules()
     {
         $segments = $this::segments();
-        $this->model= end( $segments  ) ;
-        return  config('maguttiCms.website.form_validation.'.$this->model);
+        $model_name= end( $segments  ) ;
+        return  config('maguttiCms.website.form_validation.'.$model_name);
     }
 }
