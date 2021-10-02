@@ -6,15 +6,21 @@ use App\maguttiCms\Tools\SettingHelper;
 use Illuminate\Contracts\Validation\Rule;
 
 
+/**
+ * @property float|mixed score
+ */
 class GoogleRecaptcha implements Rule
 {
+
+
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($params=0.5)
     {
+        $this->score = $params;
     }
 
     /**
@@ -27,7 +33,7 @@ class GoogleRecaptcha implements Rule
     public function passes($attribute, $value)
     {
         if (SettingHelper::getOption('captcha_site')) {
-            // controllo google reCAPTCHA
+            // check google reCAPTCHA
             $url = 'https://www.google.com/recaptcha/api/siteverify';
             $data = [
                 'secret' => SettingHelper::getOption('captcha_secret'),
@@ -45,15 +51,21 @@ class GoogleRecaptcha implements Rule
             );
             $context = stream_context_create($options);
             $result = json_decode(file_get_contents($url, false, $context));
+            return $this->validateResult($result);
+        }
+        return true;
+    }
 
-            if (
-                !$result
-                || !$result->success
-                || $result->score < 0.5
-                || $result->action != request()->get('captcha_action')
-            ) {
-                return false;
-            }
+
+    function  validateResult($result){
+
+        if (
+            !$result
+            || !$result->success
+            || $result->score < $this->score
+            || $result->action != request()->get('captcha_action')
+        ) {
+            return false;
         }
 
         return true;

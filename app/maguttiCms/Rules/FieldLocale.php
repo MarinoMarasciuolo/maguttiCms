@@ -16,7 +16,6 @@ class FieldLocale implements Rule
      */
     public function __construct()
     {
-        //
         $this->current_locale = app()->getLocale();
     }
 
