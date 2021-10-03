@@ -129,7 +129,7 @@ trait MaguttiCmsSeoTrait
         return $this;
     }
 
-    protected function tagHandler($tag) :mixed
+    protected function tagHandler($tag)
     {
         return (optional($this->model)->{'seo_' . $tag} != '') ? $this->model->{'seo_' . $tag} : optional($this->model)->{$tag};
     }

@@ -53,7 +53,7 @@ class Button extends BaseWidget
             : page_permalink_by_id($this->item->link);
     }
 
-    public function getLabel(): mixed
+    public function getLabel()
     {
         return $this->label ?? $this->item->btn_title;
     }
