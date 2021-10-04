@@ -6,9 +6,7 @@ use Form;
 use Illuminate\Support\Collection;
 
 
-/**
- *
- */
+
 class DashBoardComponent extends NavigationBaseComponent
 {
 
@@ -53,9 +51,11 @@ class DashBoardComponent extends NavigationBaseComponent
 
     function resolveModelObject($section)
     {
-        return ($this->getAttribute($section, 'model'))
-            ? new ('App\\' . $section['model'])
-            : null;
+        if ($this->getAttribute($section, 'model')){
+            $modelClass = 'App\\' . $section['model'];
+            return  new $modelClass;
+        }
+        return null;
     }
 
     function getPillsContent($model)

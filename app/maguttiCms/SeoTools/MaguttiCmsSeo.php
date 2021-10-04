@@ -20,7 +20,6 @@ trait MaguttiCmsSeoTrait
     public static function bootMaguttiCmsSeoTrait()
     {
         static::created(function ($item) {
-
         });
     }
 
@@ -29,12 +28,10 @@ trait MaguttiCmsSeoTrait
         $this->model = $model;
         $this->image = asset('website/images/logo-share.jpg');
         if ($this->model) {
+
             $this->setTitle();
-            $this->setDescription();
-            $this->setOpenGraphImages();
-            $this->setCanonical();
-            $this->setNoIndex();
             $this->addAlternate();
+
             SEO::opengraph()->addProperty('url', Request::url());
         }
 
@@ -60,10 +57,7 @@ trait MaguttiCmsSeoTrait
 
     public function setTitle(): void
     {
-        $this->title = $this->tagHandler('title');
-        if ($this->title == '') {
-            $this->title = $this->tagHandler('name');
-        }
+        $this->title = $this->tagHandler('title') ?? $this->tagHandler('name') ?: '';
         SEO::setTitle($this->title);
     }
 
@@ -81,7 +75,9 @@ trait MaguttiCmsSeoTrait
 
     public function setCanonical(): void
     {
-        $this->url = ($this->allowedQueryStrings()) ? Request::fullUrl() : Request::url();
+        $this->url = ($this->allowedQueryStrings())
+            ? Request::fullUrl()
+            : Request::url();
 
         SEO::setCanonical($this->url);
     }
@@ -91,8 +87,7 @@ trait MaguttiCmsSeoTrait
         $image_conf = config('maguttiCms.image.social');
         $fieldspec = $this->model->getFieldspec();
 
-        if (data_get($fieldspec, 'image') && optional($this->model)->image)
-        {
+        if (data_get($fieldspec, 'image') && optional($this->model)->image) {
             $folder = data_get($fieldspec, 'image.folder', null);
             $this->image = url(ImgHelper::get_cached($this->model->image, $image_conf, $folder));
         }
@@ -131,7 +126,9 @@ trait MaguttiCmsSeoTrait
 
     protected function tagHandler($tag)
     {
-        return (optional($this->model)->{'seo_' . $tag} != '') ? $this->model->{'seo_' . $tag} : optional($this->model)->{$tag};
+        return (optional($this->model)->{'seo_' . $tag} != '')
+            ? $this->model->{'seo_' . $tag}
+            : optional($this->model)->{$tag};
     }
 
     protected function allowedQueryStrings()
@@ -141,6 +138,6 @@ trait MaguttiCmsSeoTrait
 
     public function setAllowedQueryStrings($string): void
     {
-        $this->query_strings[] = $string;;
+        $this->query_strings[] = $string;
     }
 }
