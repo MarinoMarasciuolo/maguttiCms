@@ -5,8 +5,6 @@ use App\maguttiCms\Domain\Store\Facades\StoreHelper;
 use Form;
 use Illuminate\Support\Collection;
 
-
-
 class DashBoardComponent extends NavigationBaseComponent
 {
 
@@ -22,7 +20,6 @@ class DashBoardComponent extends NavigationBaseComponent
             'section' => 'See website'
         ]);
     }
-
 
     function getData() : Collection
     {

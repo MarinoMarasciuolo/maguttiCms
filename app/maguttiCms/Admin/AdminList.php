@@ -30,7 +30,7 @@ class AdminList implements AdminListInterface
     /**
      * @var
      */
-    protected $html;
+    protected string $html;
     /**
      * @var
      */
