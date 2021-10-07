@@ -26,7 +26,7 @@
 	<script type="text/javascript">
 		// init some global variable
 		var _SERVER_PATH = "{{ url('') }}";
-		var _LOCALE = "{{ LaravelLocalization::getCurrentLocale() }}";
+		var _LOCALE = "{{ app()->getLocale() }}";
 		var _CURMODEL = "{{ (isset($pageConfig['model']) ? $pageConfig['model'] : "" ) }}";
 	</script>
 
