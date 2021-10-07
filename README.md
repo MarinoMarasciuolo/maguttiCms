@@ -8,7 +8,7 @@ Open source multilingual Laravel 8.x Cms with shopping cart and social login.
 Laravel 8.x
 
 maguttiCms is released using Laravel 8.x, Vue 3 and  Boostrap 5.
-maguttiCms requires PHP 7.4 or 8.0.
+maguttiCms requires PHP 7.4 or 8.0 .
 ### How to Install
  
  - copy files in your local directory
