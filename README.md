@@ -2,7 +2,7 @@
 
 
 ## About maguttiCms
-Open source multilingual Laravel 8.x CMS with shopping cart and social login.
+Open source multilingual Laravel 8.x Cms with shopping cart and social login.
 
 ## Version
 Laravel 8.x
