@@ -1,4 +1,8 @@
 <?php
+
+use App\maguttiCms\Rules\GoogleRecaptcha;
+use Illuminate\Validation\Rule;
+
 return [
 
 		'contacts' => [
@@ -10,7 +14,9 @@ return [
 			'email'   => 'required|Between:3,64|Email',
 			'request_product_id' => 'sometimes|exists:products,id',
 			'company' => 'nullable|string',
-            //'captcha_token' => 'required|recaptcha'
+            /*'captcha_token' => [
+                Rule::when(true,[new GoogleRecaptcha(0.6),'required'])
+            ]*/
 		],
 
 		'newsletter' => [

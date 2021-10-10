@@ -23,6 +23,6 @@ class AddSubscriberAction
      */
     function execute()
     {
-         return Newsletter::create($this->attributes);;
+         return Newsletter::create($this->attributes);
     }
 }
