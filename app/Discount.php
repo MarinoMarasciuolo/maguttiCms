@@ -26,6 +26,7 @@ class Discount extends Model
 		'uses',
         'type',
 		'is_active',
+        'is_for_newsletter'
 	];
 	protected array $fieldspec = [];
 
