@@ -7,9 +7,8 @@ namespace App\maguttiCms\Domain\Newsletter\Action;
 use App\Newsletter;
 use Illuminate\Database\Eloquent\Model;
 
-class AddSubscriberAction
+class AddNewsletterSubscriberAction
 {
-
 
     private array $attributes=[];
 
@@ -23,6 +22,6 @@ class AddSubscriberAction
      */
     function execute()
     {
-         return Newsletter::create($this->attributes);
+        return Newsletter::create($this->attributes);
     }
 }

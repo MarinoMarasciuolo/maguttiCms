@@ -8,6 +8,7 @@
 */
 
 
+use App\maguttiCms\Domain\Store\Action\AddCouponToNewsletter;
 use App\maguttiCms\Website\Controllers\APIController;
 use App\maguttiCms\Website\Controllers\ContactController;
 use App\maguttiCms\Website\Controllers\FaqController;
@@ -21,7 +22,15 @@ use App\maguttiCms\Website\Controllers\Auth\LoginController;
 use App\maguttiCms\Website\Controllers\Auth\RegisterController;
 use App\maguttiCms\Website\Controllers\Auth\ResetPasswordController;
 use App\maguttiCms\Website\Controllers\Auth\ForgotPasswordController;
+use App\maguttiCms\Website\Facades\MaguttiFeatures;
+use App\Setting;
 
+Route::get('/dojo', function (){
+
+    return $coupon_code = (new AddCouponToNewsletter())->execute();
+
+    return $a;
+});
 /*
 |--------------------------------------------------------------------------
 | FRONT END

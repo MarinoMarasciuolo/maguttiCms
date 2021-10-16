@@ -1978,7 +1978,7 @@ CREATE TABLE `settings` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `settings_key_unique` (`key`),
   KEY `settings_id_index` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1987,7 +1987,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES (1,'GA_CODE','UA-','Codice  google  analitycs','GA','2016-08-09 12:01:24','2016-08-09 12:28:06'),(2,'credits_url','https://magutti.com','url credits','webiste','2016-08-09 12:29:05','2016-12-29 14:35:06'),(3,'GMAPS_KEY','','Google maps apy key','','2016-12-27 17:28:54','2016-12-29 09:24:44'),(4,'iubenda_code_it',NULL,'','','2018-06-05 07:08:21','2019-05-11 12:06:46'),(5,'iubenda_code_en',NULL,'','','2018-06-05 07:10:35','2019-05-11 12:06:47'),(6,'iubenda_site',NULL,'','','2018-06-05 07:10:49','2019-05-11 12:07:00'),(7,'captcha_site','','','','2018-08-10 15:00:00','2018-08-10 15:00:00'),(8,'captcha_secret','','','','2018-08-10 15:00:00','2018-08-10 15:00:00'),(9,'LNG','9.432586','google maps longitude','GMAPS','2019-05-01 06:53:24','2019-05-11 12:08:00'),(10,'LAT','46.138065','google maps latitude','GMAPS','2019-05-01 06:55:27','2019-05-11 12:08:16'),(11,'THEME_COLOR','#9a9c00','name=\"theme-color\" content=\"THEME_COLOR\"','THEME','2019-05-02 18:04:54','2019-05-02 18:13:52'),(12,'debug','1','Store in debug mode','store','2021-03-06 09:55:31','2021-03-06 09:55:31'),(13,'enable_social_auth','1','Enable. social authentication','social_auth','2021-06-06 11:43:19','2021-06-06 11:49:27');
+INSERT INTO `settings` VALUES (1,'GA_CODE','UA-','Codice  google  analitycs','GA','2016-08-09 12:01:24','2016-08-09 12:28:06'),(2,'credits_url','https://magutti.com','url credits','webiste','2016-08-09 12:29:05','2016-12-29 14:35:06'),(3,'GMAPS_KEY','','Google maps apy key','','2016-12-27 17:28:54','2016-12-29 09:24:44'),(4,'iubenda_code_it',NULL,'','','2018-06-05 07:08:21','2019-05-11 12:06:46'),(5,'iubenda_code_en',NULL,'','','2018-06-05 07:10:35','2019-05-11 12:06:47'),(6,'iubenda_site',NULL,'','','2018-06-05 07:10:49','2019-05-11 12:07:00'),(7,'captcha_site','','','','2018-08-10 15:00:00','2018-08-10 15:00:00'),(8,'captcha_secret','','','','2018-08-10 15:00:00','2018-08-10 15:00:00'),(9,'LNG','9.432586','google maps longitude','GMAPS','2019-05-01 06:53:24','2019-05-11 12:08:00'),(10,'LAT','46.138065','google maps latitude','GMAPS','2019-05-01 06:55:27','2019-05-11 12:08:16'),(11,'THEME_COLOR','#9a9c00','name=\"theme-color\" content=\"THEME_COLOR\"','THEME','2019-05-02 18:04:54','2019-05-02 18:13:52'),(12,'debug','1','Store in debug mode','store','2021-03-06 09:55:31','2021-03-06 09:55:31'),(13,'enable_social_auth','1','Enable. social authentication','social_auth','2021-06-06 11:43:19','2021-06-06 11:49:27'),(14,'newsletter_add_welcome_coupon','1','Add welcome discount coupon  in email sent to user','newsletter','2021-10-16 09:16:49','2021-10-16 09:28:42'),(15,'newsletter_coupon_discount_amount','10','Coupon discount amount . add % for percentage amount (eg 10%)','newsletter','2021-10-16 09:19:35','2021-10-16 09:28:16');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2343,4 +2343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-10-15 21:29:03
+-- Dump completed on 2021-10-16 14:28:25

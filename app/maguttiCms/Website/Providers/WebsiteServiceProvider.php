@@ -28,5 +28,6 @@ class WebsiteServiceProvider extends ServiceProvider
       App::bind('StoreHelper', function() {return new \App\maguttiCms\Domain\Store\StoreHelper;});
       App::bind('ImgHelper', function() {return new \App\maguttiCms\Tools\ImgHelper;});
       App::bind('SeoLandingHelper', function() {return new \App\maguttiCms\SeoTools\SeoLandingHelper;});
+      App::bind('MaguttiFeatures', function () { return new \App\maguttiCms\Tools\Features; });
     }
 }

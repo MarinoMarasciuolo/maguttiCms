@@ -2,46 +2,44 @@
 
 namespace App\maguttiCms\Website\Controllers;
 
-use App\Discount;
-use App\Http\Controllers\Controller;
-use App\maguttiCms\Domain\Newsletter\Action\AddSubscriberAction;
-use App\maguttiCms\Domain\Newsletter\Action\NotifyNewSubscriberAction;
-use App\maguttiCms\Domain\Store\Action\CreateCouponAction;
-use App\maguttiCms\Notifications\ContactRequest;
-use App\maguttiCms\Notifications\NewsletterSubscriberAdminNotification;
-use App\maguttiCms\Notifications\NewsletterSubscribeUserNotification;
-use App\maguttiCms\Tools\JsonResponseTrait;
-use App\maguttiCms\Website\Requests\AjaxFormRequest;
-use Illuminate\Support\Facades\Notification;
+
 use Input;
 use Validator;
-use App\Newsletter;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
+
+use App\maguttiCms\Tools\JsonResponseTrait;
+use App\maguttiCms\Website\Requests\AjaxFormRequest;
+
+use App\maguttiCms\Domain\Store\Action\AddCouponToNewsletter;
+use App\maguttiCms\Domain\Newsletter\Action\NotifyNewSubscriberAction;
+use App\maguttiCms\Domain\Newsletter\Action\AddNewsletterSubscriberAction;
+
 
 class APIController extends Controller
 {
-
+    private array $attributes_bag ;
     use JsonResponseTrait;
-
-    /**
+   /**
      * @return mixed
      */
     public function subscribeNewsletter(AjaxFormRequest $request)
     {
         $validator = Validator::make($request->all(), $request->rules());
 
-        $attributes_bag=[];
-        $attributes_bag['email']=$request->email;
-        $attributes_bag['locale']=app()->getLocale();
+        $coupon_code = (new AddCouponToNewsletter())->execute();
+        if($coupon_code)$this->attributes_bag['coupon_code']= $coupon_code;
 
-        $coupon_code = (new CreateCouponAction(Discount::AMOUNT,10))->execute();
-        $attributes_bag['coupon_code']=$coupon_code;
+        $this->attributes_bag['locale'] = app()->getLocale();
 
-        $newsletter = (new AddSubscriberAction($attributes_bag))->execute();
+        // merge custom attributes
+        $validated = $validator->safe()->merge($this->attributes_bag);
+
+        $newsletter = (new AddNewsletterSubscriberAction($validated->all()))->execute();
 
         (new NotifyNewSubscriberAction($newsletter))->execute();
 
-        return $this->responseSuccess(trans('website.mail_message.subscribe_newsletter_feedback'))->apiResponse();
-
+        return $this->responseSuccess(__('website.mail_message.subscribe_newsletter_feedback'))->apiResponse();
     }
 
 }
