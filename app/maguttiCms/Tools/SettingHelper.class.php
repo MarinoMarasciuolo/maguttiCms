@@ -13,14 +13,10 @@ class SettingHelper {
      */
 	static public function getOption($key)
 	{
-
-		$settingObj = Setting::where('Key',$key)->first();
-		if ($settingObj) {
-			return $settingObj->value;
-		}
-		else {
-			return '';
-		}
+		$settingObj = Setting::firstWhere('Key',$key);
+		return  ($settingObj)
+            ? $settingObj->value
+            :  '';
 	}
 
 }
