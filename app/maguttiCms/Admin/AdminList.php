@@ -4,6 +4,7 @@ namespace App\maguttiCms\Admin;
 
 
 use App\maguttiCms\Admin\Decorators\AdminListComponentTrait;
+use App\maguttiCms\Admin\Decorators\AdminListExtraComponentTrait;
 use App\maguttiCms\Admin\Helpers\AdminListAction;
 use Carbon\Carbon;
 use Form;
@@ -24,7 +25,8 @@ class AdminList implements AdminListInterface
     use AdminListAction,
         AdminListSeparator,
         AdminListSortableHeader,
-        AdminListComponentTrait;
+        AdminListComponentTrait,
+        AdminListExtraComponentTrait;
 
     private $authorized_fields;
     /**
@@ -95,6 +97,12 @@ class AdminList implements AdminListInterface
     function authorizedFields()
     {
         return $this->authorized_fields = cmsUserValidateActionRoles($this->property['field']);
+    }
+
+
+    function z(){
+
+       return "<x-dynamic-component :component=\"'admin.list.discount-extra-features'\" />";
     }
 
 }

@@ -857,6 +857,7 @@ return [
             'title' => 'Orders',
             'icon' => 'shopping-cart',
             'section' =>'shop',
+            //'list_custom_header'=>'admin.list.order-big-amount',
             'field' => [
                 'id',
                 'created_at' => ['type' => 'date', 'field' => 'created_at', 'orderable' => true],

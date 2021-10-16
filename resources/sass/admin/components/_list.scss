@@ -10,7 +10,8 @@
 		background-color: white;
 		border-radius: $card-radius;
 		overflow: hidden;
-		@include shadow(1);
+		padding:1.5rem;
+
 	}
 	.selectable-column {
 		width: 0.01px;

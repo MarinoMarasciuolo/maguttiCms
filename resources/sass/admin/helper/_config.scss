@@ -17,10 +17,10 @@ $header-item-margin: 0 0;
 // Table.
 $table-border-width: 1px;
 $table-border-color: rgba($color-3, 0.5);
-$table-head-background: $primary;
+$table-head-background: $dark;
 $table-head-color: $color-1;
-$table-head-cell-padding: 0.5em 1em;
-$table-body-cell-padding: 0.3em 0.5em;
+$table-head-cell-padding: .75em;
+$table-body-cell-padding: 0.75em;
 $table-alternate-rows: true;
 $table-body-row-odd: $color-1;
 $table-body-row-even: darken(white, 3);
@@ -31,7 +31,7 @@ $button-border-width: 1px;
 $border-radius-box:	5px;
 
 // Card.
-$card-radius: 5px;
+$card-radius: 0.25rem;
 $card-padding: 1em;
 
 // Forms.

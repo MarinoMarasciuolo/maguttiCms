@@ -3,15 +3,11 @@
 @section('content')
     @include('admin.common.action-bar')
     <main id="main-list" class="container-fluid">
-        @include('admin.common.search_bar')
-        <div class="d-flex justify-content-between align-items-center list-header my-3">
-            <x-admin.list.header class="p-0 m-0">
-                <x-slot name="icon">
-                    {{icon($pageConfig['icon'])}}
-                </x-slot>
-                {{sprintf(trans('admin.label.list_title'), (\Lang::has('admin.models.' . $model)) ? trans('admin.models.' . $model) : ucwords($model))}}
-            </x-admin.list.header>
-
+       <div class="d-grid gap-3">
+            @if(AdminList::validatedIfExtraHeaderComponentExist($pageConfig))
+                <x-dynamic-component :component="AdminList::getExtraHeaderComponentName($pageConfig)" />
+            @endif
+            @include('admin.common.search_bar')
         </div>
 
         @include('shared.notification')

@@ -23,18 +23,22 @@
 				&:nth-child(even) {
 					background-color: $table-body-row-even;
 				}
+				&:hover{
+					filter: brightness(99%);
+				};
 			}
 		}
 
 		td,
 		th {
 			padding: $table-body-cell-padding;
+
 		}
 	}
 
 	td,
 	th {
-		border: $table-border-width solid $table-border-color;
+		//border: $table-border-width solid $table-border-color;
 	}
 
 	th {

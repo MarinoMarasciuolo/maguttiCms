@@ -1,6 +1,6 @@
 
     {!! Form::open(['id' => 'search_form', 'name'=>'search_form', 'method' => 'GET']) !!}
-    <div id="search-bar" class="card">
+    <div id="search-bar" class="card mb-3">
         <x-admin.partial.select-item-per-page></x-admin.partial.select-item-per-page>
         @if(isset($pageConfig['field_searchable']))
         @foreach ( cmsUserValidateActionRoles($pageConfig['field_searchable']) as $key => $search_item )
