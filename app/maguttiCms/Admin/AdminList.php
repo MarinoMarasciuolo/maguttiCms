@@ -44,6 +44,7 @@ class AdminList implements AdminListInterface
      */
     public function initList($property)
     {
+
         $this->html = "";
         $this->property = $property;
         $this->groupBySeparator();
@@ -98,12 +99,5 @@ class AdminList implements AdminListInterface
     {
         return $this->authorized_fields = cmsUserValidateActionRoles($this->property['field']);
     }
-
-
-    function z(){
-
-       return "<x-dynamic-component :component=\"'admin.list.discount-extra-features'\" />";
-    }
-
 }
 

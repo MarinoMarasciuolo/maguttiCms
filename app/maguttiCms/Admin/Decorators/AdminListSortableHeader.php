@@ -19,14 +19,19 @@ trait AdminListSortableHeader
             $item = $this->property['field'][$i];
             if ($this->fieldIsOrderable($item)) {
                 $curField = (is_array($item)) ? data_get($item, 'order_field', $item['field']) : $item;
+
+                $html .="<span class='ps-2 table-orderable'>";
+
                 $html .= "<a href=\"".$this->queryString($curField,'desc')."\">
                             <i class=\"fa fa-arrow-down\" aria-hidden=\"true\"></i>
                           </a>\n";
                 $html .= "<a href=\"".$this->queryString($curField,'asc')."\">
                             <i class=\"fa fa-arrow-up\" aria-hidden=\"true\"></i>
                           </a>\n";
+                $html .="</span>";
             }
         }
+
         return $html;
     }
 

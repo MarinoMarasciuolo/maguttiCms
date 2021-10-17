@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Admin\List;
+namespace App\View\Components\Admin\Lists;
 
 use Illuminate\View\Component;
 
-class ExtraFeatures extends Component
+class OrderBigAmount extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class ExtraFeatures extends Component
      */
     public function render()
     {
-        return view('components.admin.list.extra-features');
+        return view('components.admin.lists.order-big-amount');
     }
 }

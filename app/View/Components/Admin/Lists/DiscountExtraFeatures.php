@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Admin\List;
+namespace App\View\Components\Admin\Lists;
 
 use App\Domain;
 use App\Setting;
@@ -30,6 +30,6 @@ class DiscountExtraFeatures extends ExtraFeatures
      */
     public function render()
     {
-        return view('components.admin.list.discount-extra-features');
+        return view('components.admin.lists.discount-extra-features');
     }
 }

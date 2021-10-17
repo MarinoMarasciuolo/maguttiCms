@@ -11,8 +11,8 @@ use Illuminate\Support\Str;
 
 trait AdminListExtraComponentTrait
 {
-    protected string $_ADMIN_LIST_EXTRA_COMPONENT_DEFAULT ="App\View\Components\Admin\List\\";
-    protected string $_ADMIN_LIST_EXTRA_COMPONENT_DEFAULT_PATH ="admin.list.";
+    protected string $_ADMIN_LIST_EXTRA_COMPONENT_DEFAULT ="App\View\Components\Admin\Lists\\";
+    protected string $_ADMIN_LIST_EXTRA_COMPONENT_DEFAULT_PATH ="admin.lists.";
 
 
     function validatedIfExtraHeaderComponentExist($itemProperty)

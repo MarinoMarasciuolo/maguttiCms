@@ -9,61 +9,17 @@
             @endif
             @include('admin.common.search_bar')
         </div>
-
         @include('shared.notification')
         @if ($articles->isEmpty())
-            <x-ui.alert  class='alert-info d-flex justify-content-center'>
+            <x-ui.alert  class='alert-info d-flex justify-content-center mt-3'>
                 <div>{{trans('admin.message.no_item_found')}}</div>
             </x-ui.alert>
         @else
             <div class="table-container">
-                <form>
-                    {{ csrf_field() }}
-                    <div class="table-responsive">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    {{ AdminList::initList($pageConfig)->getListHeader() }}
-                                    @if (AdminList::hasActions())
-                                        <th>{!! trans('admin.label.actions')!!}</th>
-                                    @endif
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($articles as $article)
-                                @if(AdminList::showGroupBySeparator($article))
-                                    <tr>
-                                        <td colspan="{{AdminList::separatorColSpan()}}" class="text-start py-2 h4 "
-                                            style="background-color: #c1c1c1">
-                                            {{AdminList::getGroupBySeparatorValue($article)}}
-                                        </td>
-                                    </tr>
-                                @endif
-                                <tr id="row_{!! $article->id !!}" {{AdminList::getGroupBySeparatorAttribute($article)}}>
-                                    @if (auth_user('admin')->action('selectable',$pageConfig))
-                                        <td class="selectable-column">
-                                            <x-admin.list.check-box-selectable :article="$article"/>
-                                        </td>
-                                    @endif
-                                    @foreach(AdminList::authorizedFields() as $label)
-                                        <td class="{{data_get($label,'class')}}">
-                                            {!! AdminList::renderComponent($article,$label)!!}
-                                        </td>
-                                    @endforeach
-                                    @if (AdminList::hasActions())
-                                        <td class="list-actions">
-                                           <x-admin.list.action :pageConfig="$pageConfig" :article="$article"></x-admin.list.action>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </form>
+                <x-admin.lists.table.index :articles="$articles" :config="$pageConfig"></x-admin.lists.table.index>
             </div>
         @endif
-        <x-admin.list.pagination :articles="$articles"/>
+        <x-admin.lists.pagination :articles="$articles"/>
     </main>
 @endsection
 
