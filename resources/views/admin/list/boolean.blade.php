@@ -11,9 +11,9 @@
 @else
     <div class="bool-toggle">
         @if ($item->getValue() == 1)
-            <i class="text-success h4">{{AdminDecorator::getBooleanOn()}}</i>
+            <i class="text-success h2">{{AdminDecorator::getBooleanOn()}}</i>
         @else
-            <i class="text-danger h4">{{AdminDecorator::getBooleanOff()}}</i>
+            <i class="text-danger h2">{{AdminDecorator::getBooleanOff()}}</i>
         @endif
     </div>
 @endif
