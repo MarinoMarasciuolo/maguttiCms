@@ -39,8 +39,7 @@ class AdminServicesController
 
     public function sections()
     {
-
-        $items = AdminSectionResource::collection(Domain::whereDomain('context')->get());
+        $items = AdminSectionResource::collection(Domain::byDomain('context')->get());
         return $this->setData($items)->responseSuccess()->apiResponse();
     }
 
