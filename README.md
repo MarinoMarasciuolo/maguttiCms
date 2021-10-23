@@ -25,7 +25,7 @@ Configure your .env file.
 
 To import Db tables run:
 
-    $ php artisan magutticms::seed
+    $ php artisan magutticms:seed
     
 in alternative you can create db tables importing **framework_base.sql** file located under the db folder.
 
