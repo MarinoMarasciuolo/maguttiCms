@@ -34,9 +34,8 @@ The run the following commands:
     $ php artisan key:generate
     $ npm install
     $ npm run production
-    
- 
- To access the admin panel (http://yourpath/admin)
+   
+To access the admin panel (http://yourpath/admin)
  - email: cmsadmin@magutti.com
  - password: password
  
@@ -80,4 +79,3 @@ Code released under the MIT license.
 Security Vulnerabilities
 =======
 If you discover a security vulnerability within maguttiCms, please send an e-mail to  at hello@magutti.com. All security vulnerabilities will be promptly addressed.
-
