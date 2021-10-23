@@ -1,7 +1,7 @@
 ![maguttiCms](https://www.magutti.com/public//website/images/logo.png)
 
 
-## About maguttiCms
+## vallecaminica
 Open source multilingual Laravel 8.x Cms with shopping cart and social login.
 
 ## Version
