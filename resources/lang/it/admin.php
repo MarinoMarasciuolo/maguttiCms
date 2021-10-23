@@ -62,6 +62,7 @@ return [
         'image'         => 'Immagine',
 		'insert'		=> 'Inserisci',
 		'is_active'		=> 'Stato',
+        'items_per_page'=> ':Items Elementi per page',
 		'languages'		=> 'Lingue',
 		'last_name'		=> 'Cognome',
         'lat'		    => 'Latitude',
