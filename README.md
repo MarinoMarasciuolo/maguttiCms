@@ -1,7 +1,7 @@
 ![maguttiCms](https://www.magutti.com/public//website/images/logo.png)
 
 
-## vallecaminica
+## About maguttiCms
 Open source multilingual Laravel 8.x Cms with shopping cart and social login.
 
 ## Version
@@ -25,7 +25,7 @@ Configure your .env file.
 
 To import Db tables run:
 
-    $ php artisan magutticms:seed
+    $ php artisan magutticms::seed
     
 in alternative you can create db tables importing **framework_base.sql** file located under the db folder.
 
