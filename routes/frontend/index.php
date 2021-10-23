@@ -25,12 +25,6 @@ use App\maguttiCms\Website\Controllers\Auth\ForgotPasswordController;
 use App\maguttiCms\Website\Facades\MaguttiFeatures;
 use App\Setting;
 
-Route::get('/dojo', function (){
-
-    return $coupon_code = (new AddCouponToNewsletter())->execute();
-
-    return $a;
-});
 /*
 |--------------------------------------------------------------------------
 | FRONT END
