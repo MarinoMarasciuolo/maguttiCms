@@ -10,16 +10,37 @@ Laravel 8.x
 maguttiCms is released using Laravel 8.x, Vue 3 and  Boostrap 5.
 maguttiCms requires PHP 7.4 or 8.0 .
 ### How to Install
+
+
+Clone this repository and install the dependencies.
+
+    $ git clone https://github.com/marcoax/maguttiCms.git
+    $ composer install
+
+On PHP8 if you have trouble try to run composer update
+
+Configure your .env file. 
+
+    $ rename env.example file to .env and set your db connection data
+
+Import DB tables run
+
+    $ php artisan magutticms::seed
+    
+in alternative you can create db tables importing **framework_base.sql** file located under the db folder.
+
+The run the following  command
+
+    $ php artisan key:generate
+    $ npm install
+    $ npm run production
+    
  
- - copy files in your local directory
- - rename env.example to .env file and set your db connection data
- - run composer install (on PHP 8 if you have trouble try to run composer update)
- - run php artisan key:generate
- - create db tables importing framework_base.sql file located under the db folder
- - to login in the admin panel (http://yourpath/admin)
+ To access the admin panel (http://yourpath/admin)
  - email: cmsadmin@magutti.com
  - password: password
- - for shared hosting you can set ASSET_PUBLIC_PATH in .env  file (eg ASSET_PUBLIC_PATH='public/')
+ 
+ For shared hosting you can set ASSET_PUBLIC_PATH in .env  file (eg ASSET_PUBLIC_PATH='public/')
    
 ### Features
  - Free and open source
