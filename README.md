@@ -23,13 +23,13 @@ Configure your .env file.
 
     $ rename env.example file to .env and set your db connection data
 
-Import DB tables run
+To import Db tables run:
 
     $ php artisan magutticms::seed
     
 in alternative you can create db tables importing **framework_base.sql** file located under the db folder.
 
-The run the following  command
+The run the following commands:
 
     $ php artisan key:generate
     $ npm install
