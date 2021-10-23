@@ -11,7 +11,7 @@ class SetupRedis extends Command
      *
      * @var string
      */
-    protected $signature = 'laracms:setup-redis {--show : Display the key instead of modifying the file}';
+    protected $signature = 'magutticms:setup-redis {--show : Display the key instead of modifying the file}';
 
     /**
      * The console command description.

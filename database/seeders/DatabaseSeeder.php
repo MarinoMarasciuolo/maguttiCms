@@ -13,6 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        \DB::unprepared(file_get_contents(__dir__ . '/../../db/framework_base.sql'));
     }
 }
