@@ -306,6 +306,7 @@ return [
         'HtmlSocial' => App\maguttiCms\Website\Facades\HtmlSocial::class,
         'HtmlMenu'=> App\maguttiCms\Website\Facades\HtmlMenu::class,
         'UserFeatures' => App\maguttiCms\Domain\User\Facades\UserFeatures::class,
+        'MaguttiFeatures' => App\maguttiCms\Website\Facades\MaguttiFeatures::class,
         /*
          |--------------------------------------------------------------------------
          | MaguttiCms Store Class Aliases

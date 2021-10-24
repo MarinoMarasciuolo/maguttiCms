@@ -14,7 +14,35 @@ class Features
      */
     public static function enabled(string $feature)
     {
-        return in_array($feature, config('maguttiCms.option.features', []));
+
+       return in_array($feature, config('maguttiCms.website.option.features', []));
+    }
+
+    public static function optionEnabled(string $feature, string $option)
+    {
+        return static::enabled($feature) && config("maguttiCms.website.option.{$feature}.{$option}") === true;
+    }
+
+
+
+
+    /**
+     * Determine if the application has user login /registration enable.
+     *
+     * @return bool
+     */
+    public static function hasReservedArea()
+    {
+       return static::enabled(static::enableReservedArea());
+    }
+    /**
+     * Enable the profile photo upload feature.
+     *
+     * @return string
+     */
+    public static function enableReservedArea()
+    {
+        return 'reserved-area';
     }
 
     /**
@@ -34,4 +62,6 @@ class Features
     {
         return SettingHelper::getOption($feature);
     }
+
+
 }
