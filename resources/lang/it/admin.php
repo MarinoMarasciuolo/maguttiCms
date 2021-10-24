@@ -84,6 +84,7 @@ return [
         'note'          => 'Note',
         'number'        => 'Numero',
 		'paid'			=> 'Pagato',
+        'page-blocks'   => 'Blocchi pagina',
 		'parent'		=> 'Genitore',
 		'payment'		=> 'Pagamento',
 		'payment_transaction'		=> 'Transazione',
