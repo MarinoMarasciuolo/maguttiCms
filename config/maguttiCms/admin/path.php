@@ -10,10 +10,10 @@ return [
     'media_img_repository' => env('ASSET_PUBLIC_PATH','').'media/images/',
     'media_doc_repository' => env('ASSET_PUBLIC_PATH','').'media/docs/',
 
-	'cms'            => 'cms/',
-	'cms_assets'     => 'cms/',
-	'cms_js'         => 'cms/js/',
-	'cms_css'        => 'cms/css/',
+    'cms' => env('ASSET_PUBLIC_PATH','').'cms/',
+    'cms_assets' => env('ASSET_PUBLIC_PATH','').'cms/',
+    'cms_js' => env('ASSET_PUBLIC_PATH','').'cms/js/',
+    'cms_css' => env('ASSET_PUBLIC_PATH','').'cms/css/',
 
     'assets'     	 => env('ASSET_PUBLIC_PATH',''),
     'common_js'      => env('ASSET_PUBLIC_PATH','').'js/',
