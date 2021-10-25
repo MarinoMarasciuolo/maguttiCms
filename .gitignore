@@ -51,7 +51,6 @@ xxx*.*
 cache/*.*
 *idea
 *.txt
-*.md
 readme.md
 uploads/*
 
