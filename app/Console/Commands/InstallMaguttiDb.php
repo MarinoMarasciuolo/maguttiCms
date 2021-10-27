@@ -28,12 +28,12 @@ class InstallMaguttiDb extends Command
      *
      * @var string
      */
-    protected $description = 'Install the maguttiCms seed file framework_base.sql';
+    protected $description = 'Install the maguttiCms seed from framework_base.sql file located in the db folder';
 
 
     protected string $seed_file = "framework_base.sql";
 
-  
+
     /**
      * Create a new command instance.
      *
