@@ -77,7 +77,7 @@ class InstallMaguttiDb extends Command
     }
 
     function checkIfDbIsAlreadyInstalled(){
-
+        // check if users table already exists
         return \Schema::hasTable('users');
     }
 
