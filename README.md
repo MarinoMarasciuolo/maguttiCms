@@ -14,7 +14,7 @@ maguttiCms requires PHP 7.4 or 8.0 .
 
 Clone this repository and install the dependencies.
 
-    $ git clone https://github.com/marcoax/maguttiCms.git
+    $ git clone https://github.com/marcoax/maguttiCms.git && cd maguttiCms
     $ composer install
 
 On PHP8 if you have trouble try to run composer update
