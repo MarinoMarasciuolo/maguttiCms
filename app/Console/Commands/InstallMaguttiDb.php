@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
+use Illuminate\Support\Facades\DB;
 
 class InstallMaguttiDb extends Command
 {
@@ -37,6 +38,7 @@ class InstallMaguttiDb extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->db_name =env('DB_DATABASE');
     }
 
     /**
@@ -51,16 +53,28 @@ class InstallMaguttiDb extends Command
             return 1;
         }
 
+        if($this->checkIfDbIsAlreadyInstalled()){
+            if (!$this->confirm($this->db_name.' db already exists, overwritten?')) {
+                $this->info($this->db_name.' db not updated!');
+                return;
+            }
+        }
+
         $seed_file = $this->getSeedPath();
         $this->info("Reading [$this->seed_file] file....");
-        $this->info("");
-
-        \DB::unprepared(file_get_contents($seed_file));
+        $this->info(".....");
+        DB::unprepared(file_get_contents($seed_file));
 
         $this->info('maguttiCms db installed successfully!');
+
         $this->info("");
 
 
+    }
+
+    function checkIfDbIsAlreadyInstalled(){
+
+        return \Schema::hasTable('users');
     }
 
     function getSeedPath(){
