@@ -19,7 +19,7 @@ import CheckboxGridComponent from '../components/admin/CheckBoxesGrid/CheckGridC
 
 import FileManagerGridComponent from '../components/admin/Filemanager/IndexComponent';
 
-//import ListComponent from './../components/admin/ListComponent' ;
+//import ListComponent from '../components/admin/ListComponent';
 
 import languageBundle from '@kirschbaum-development/laravel-translations-loader!@kirschbaum-development/laravel-translations-loader';
 import { createI18n } from 'vue-i18n'
@@ -47,7 +47,8 @@ const app = createApp({
         CopyableInputComponent,
         GeneratorInputComponent,
         CheckboxGridComponent,
-        FileManagerGridComponent
+        FileManagerGridComponent,
+
     }
 });
 app.use(i18n);
