@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Console\ConfirmableTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Console\ConfirmableTrait;
 
+/**
+ * @property mixed db_name
+ */
 class InstallMaguttiDb extends Command
 {
 
@@ -28,8 +31,9 @@ class InstallMaguttiDb extends Command
     protected $description = 'Install the maguttiCms seed file framework_base.sql';
 
 
-    protected $seed_file = "framework_base.sql";
+    protected string $seed_file = "framework_base.sql";
 
+  
     /**
      * Create a new command instance.
      *
