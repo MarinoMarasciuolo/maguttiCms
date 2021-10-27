@@ -65,8 +65,9 @@ class InstallMaguttiDb extends Command
         }
 
         $seed_file = $this->getSeedPath();
+
         $this->info("Reading [$this->seed_file] file....");
-        $this->info(".....");
+
         DB::unprepared(file_get_contents($seed_file));
 
         $this->info('maguttiCms db installed successfully!');
