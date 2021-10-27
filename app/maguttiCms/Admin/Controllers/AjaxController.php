@@ -12,10 +12,10 @@ use App\Media;
 
 class AjaxController extends Controller
 {
-	private $responseContainer = ['status' => 'ko', 'message' => '', 'error' => '', 'data' => ''];
+	private array $responseContainer = ['status' => 'ko', 'message' => '', 'error' => '', 'data' => ''];
 	protected $request;
 
-	public function update($action, $model, $id = '', Request $request)
+	public function update(Request $request,$action, $model, $id = '' )
 	{
 		$this->request = $request;
 		switch ($action) {
@@ -27,14 +27,15 @@ class AjaxController extends Controller
                 $locale = ($this->request->filled('locale'))?$this->request->get('locale'):null;
 				$modelClass = 'App\\' . $model;
 				$object = $modelClass::whereId($id)->firstOrFail();
+
 				if($locale){
                     $attribute = substr($field, 0, -3);
                     $object->translateOrNew($locale)->$attribute = $value;
                 }
 				else {
                     $object->$field = $value;
-
                 }
+
                 $object->save();
 
                 $this->responseContainer['status'] = 'ok';
@@ -293,7 +294,7 @@ class AjaxController extends Controller
 	/**
 	* This method is used to save the edit data
 	*/
-	public function updateFileManager($id, Request $request)
+	public function updateFileManager(Request $request,$id )
 	{
 		$article = Media::find($id);
 
