@@ -52,14 +52,6 @@
 						@if ($pageConfig->get('showBlock') == 1)
 							<div class="tab-pane fade" id="block_tab" role="tabpanel" aria-labelledby="block_tab">
 								@include('admin.helper.blocks')
-								<list-component :items="{{collect(new App\maguttiCms\Domain\Block\Resources\BlockCollection($article->blocks))}}"
-												:lang="{{$locales}}"
-												:selects="{{App\Domain::all()}}"
-												:products="{{App\Product::all()}}"
-												:model="{{$article}}"
-												class="d-none"
-								>
-								</list-component>
 							</div>
 						@endif
 						@if ($pageConfig->get('showSeo') == 1)
