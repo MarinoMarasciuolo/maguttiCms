@@ -8,7 +8,7 @@
         @endif
         <div class="{{!$contentHasMedia()? "col-12":"col-12  col-md-6 order-md-1 "}}">
             <x-website.partials.page-title>
-                    {!!   $article->title !!}
+                    {{ $article->title }}
                     @if($article->subtitle)
                         <x-slot name="subtitle">{{ $article->subtitle }}</x-slot>
                     @endif
