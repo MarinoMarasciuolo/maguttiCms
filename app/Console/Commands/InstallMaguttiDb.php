@@ -74,7 +74,6 @@ class InstallMaguttiDb extends Command
 
         $this->info("");
 
-
     }
 
     function checkIfDbIsAlreadyInstalled(){

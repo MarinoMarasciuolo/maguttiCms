@@ -9,7 +9,7 @@ class StringComponent extends InputComponentAdminForm
     function render($key, $value, $locale = '')
     {
 
-        return Form::text($key, $value, $this->field_properties());
+        return Form::text($key, strip_tags($value,'<br>'), $this->field_properties());
     }
 
 }
