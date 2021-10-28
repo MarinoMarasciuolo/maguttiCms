@@ -21,7 +21,7 @@
 							<div class="h4 product-page-price my-3">
 							<x-magutti_store-product-display-price :product="$product"  :type="'product-page'"/>
 							</div>
-							<cart-add-item	ref="v100" :product="{{$product}}" :min=1 :step="1" :max="100" :value=1>
+							<cart-add-item	ref="v100" :product="{!! $product !!}" :min=1 :step="1" :max="100" :value=1>
 								<template #btn_label>{{ __('store.items.add') }}</template>
 								<template #label>
 									<h5	class="product-page-add-label text-italic text-color-4 mb-1">{{ __('store.cart.table.quantity') }}</h5>
