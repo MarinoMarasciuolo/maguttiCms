@@ -46,7 +46,7 @@ class Button extends BaseWidget
 
     public function getLink()
     {
-        if (Str::startsWith($this->item->link, ['http', 'https'])) return $this->item->link;
+        if (Str::startsWith(optional($this->item)->link, ['http', 'https'])) return $this->item->link;
 
         return ($this->route)
             ? route($this->route)
