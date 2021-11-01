@@ -207,6 +207,7 @@ class Article extends Model
             'mediaType' => 'Doc',
             'display' => 1,
             'uploadifive' => 1,
+            'validation'=>['mimes:pdf,zip,doc','max:2048'],
             'accept' => '.pdf'
         ];
         $this->fieldspec['video'] = [

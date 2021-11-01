@@ -4,6 +4,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Str;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 use App\maguttiCms\Domain\Store\Facades\StoreHelper;
@@ -99,9 +100,17 @@ class LoginController extends Controller
     */
     public function logout(Request $request)
     {
-        $this->guard('users')->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
+        $this->guard()->logout();
+
+        /*collect($request->session())->contains('login_web')->each(function($item, $key) use ($request) {
+
+            if(Str::startsWith($key,'login_web')){
+                $request->session()->forget($key);
+            }
+        });
+
+
+        $request->session()->regenerateToken();*/
 
         return redirect($this->redirectAfterLogout);
     }

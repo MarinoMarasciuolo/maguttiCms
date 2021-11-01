@@ -33,9 +33,12 @@ class AdminFormRequest extends FormRequest
 
         $obj = $this->getModelObject();
         foreach ($obj->getFieldspec() as $key => $field) {
-            if (data_get($field, 'validation') != '') {
-                $this->handleValidationRules($field['validation'], $key);
-            } else if (data_get($field, 'required') && in_array($key, $obj->getFillable())) {
+
+            // skip validation if  type is media;
+            if (data_get($field, 'validation') != '' && data_get($field, 'type') != 'media') {
+                 $this->handleValidationRules($field['validation'], $key);
+            }
+            else if (data_get($field, 'required') && in_array($key, $obj->getFillable())) {
                 $this->addRule($key);
             }
         }

@@ -9,7 +9,7 @@
 				<fieldset class="alert alert-info">
 					<input id="file_upload_{{$key}}" type="file" class="btn btn-primary file_upload_single" data-key="{{$key}}">
 					<div>
-						<div id="queue_{{$key}}" class="queue">{{trans('admin.message.media_drag')}}</div>
+						<div id="queue_{{$key}}" class="queue">{{__(data_get($properties,'accept')?'admin.message.media_drag_accept':'admin.message.media_drag',['files' => data_get($properties,'accept')])}}</div>
 					</div>
 				</fieldset>
 				<a href="javascript:$('#file_upload_{{$key}}').uploadifive('upload')" class="btn btn-primary hidden">

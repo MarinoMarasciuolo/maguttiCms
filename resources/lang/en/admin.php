@@ -162,6 +162,7 @@ return [
         'media_doc_gallery'   => 'Docs gallery',
         'media_doc_type'      => 'Media Type',
         'media_drag'          => 'Drag your files here -> png,gif,jpg,pdf,zip only',
+        'media_drag_accept'          => 'Drag your files here -> :files only',
         'media_image_gallery' => 'Images gallery',
         'media_max_file'      => 'Upload Image or doc - max file size 1Mb',
         'no_item_found'       => 'No item found',

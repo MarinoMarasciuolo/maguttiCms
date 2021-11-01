@@ -1,6 +1,11 @@
 <?php
 
 
+use App\maguttiCms\Admin\Controllers\AjaxImageCropperController;
+use App\maguttiCms\Admin\Controllers\AjaxMediaListController;
+use App\maguttiCms\Admin\Controllers\AjaxUploadifiveController;
+use App\maguttiCms\Admin\Controllers\AjaxUploadifiveMediaController;
+use App\maguttiCms\Admin\Controllers\AjaxUploadMediaTinyMCE;
 use App\maguttiCms\Api\V1\Controllers\AdminFileMangerController;
 use App\maguttiCms\Middleware\AdminSuggestRole;
 use App\maguttiCms\Admin\Controllers\AjaxController;
@@ -14,13 +19,13 @@ Route::group([], function () {
     | MEDIA LIBRARY
     |--------------------------------------------------------------------------
     */
-    Route::post('uploadifiveSingle/', [AjaxController::class, 'uploadifiveSingle']);
-    Route::post('uploadifiveMedia/', [AjaxController::class, 'uploadifiveMedia']);
-    Route::post('cropperMedia/', [AjaxController::class, 'cropperMedia']);
-    Route::get('updateHtml/media/{model?}', [AjaxController::class, 'updateModelMediaList']);
-    Route::get('updateHtml/{mediaType?}/{model?}/{id?}', [AjaxController::class, 'updateMediaList']);
-    Route::get('updateMediaSortList/', [AjaxController::class, 'updateMediaSortList']);
-    Route::post('upload-media-tinymce/', [AjaxController::class, 'uploadMediaTinyMCE']);
+    Route::post('uploadifiveSingle/', [AjaxUploadifiveController::class, 'handle']);
+    Route::post('uploadifiveMedia/', [AjaxUploadifiveMediaController::class,'handle']);
+    Route::post('cropperMedia/', [AjaxImageCropperController::class,'handle']);
+    Route::get('updateHtml/media/{model?}', [AjaxMediaListController::class, 'updateModelMediaList']);
+    Route::get('updateHtml/{mediaType?}/{model?}/{id?}', [AjaxMediaListController::class, 'updateMediaList']);
+    Route::get('updateMediaSortList/', [AjaxMediaListController::class, 'updateMediaSortList']);
+    Route::post('upload-media-tinymce/', [AjaxUploadMediaTinyMCE::class, 'handle']);
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +52,6 @@ Route::group([], function () {
     });
 
     Route::post('filemanager/upload', [AjaxController::class, 'uploadFileManager']);
-    //Route::get('filemanager/list/{id?}', [AjaxController::class, 'getFileManagerList']);
     /*
     |--------------------------------------------------------------------------
     | API SERVICES LIBRARY
@@ -55,10 +59,6 @@ Route::group([], function () {
     */
 
     Route::post('services/generator', [AdminServicesController::class,'generator']);
-
-
-
-
 
     /*
     |--------------------------------------------------------------------------

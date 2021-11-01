@@ -84,18 +84,19 @@ class AdminPagesController extends Controller
             $objBuilder->select($this->model->getTable() . '.*');
         }
 
-        if ($this->modelClass == 'App\AdminUser') {
-            if (!cmsUserHasRole('su')) {
-                $objBuilder->whereHas('roles', function ($query) {
-                    $query->where('name', '!=', 'su');
-                });
-            }
+        if ($this->modelClass == 'App\AdminUser' && !cmsUserHasRole('su')) {
+
+            $objBuilder->whereHas('roles', function ($query) {
+                $query->where('name', '!=', 'su');
+            });
+
         }
         $item_per_page =(request('per_page'))??config('maguttiCms.admin.list.item_per_pages');
         $articles = $objBuilder->paginate($item_per_page);
         $articles->appends($request->all())->links(); // paginazione con parametri di ricerca
         $fieldspec = $models->getFieldspec();
         $admin_can_edit = cmsUserHasRole(['su', 'admin']);
+
         return view('admin.list', [
             'articles' => $articles,
             'pageConfig' => collect($this->config),

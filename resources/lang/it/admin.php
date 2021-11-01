@@ -150,6 +150,8 @@ return [
         'media_doc_gallery'   => 'Galleria Documenti',
         'media_doc_type'      => 'Tipo Media',
         'media_drag'          => 'Trascina il tuo file qui -> solo png,gif,jpg,pdf,zip',
+        'media_drag'          => 'Trascina il tuo file qui -> solo png,gif,jpg,pdf,zip',
+        'media_drag_accept'   => 'Trascina il tuo file qui -> solo :files',
         'media_image_gallery' => 'Galleria Immagini',
         'media_max_file'      => 'Carica immagini o documento - max dimensione 1 MB',
         'no_item_found'       => 'Nessun elemento trovato',

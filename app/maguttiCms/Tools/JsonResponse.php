@@ -156,6 +156,10 @@ trait JsonResponseTrait
         if ($message) $this->setMsg($message);
         return $this;
     }
+    public function responseWithSuccess($message = '')
+    {
+        return $this->responseSuccess($message)->apiResponse();
+    }
 
     /**
      * @param string $message
