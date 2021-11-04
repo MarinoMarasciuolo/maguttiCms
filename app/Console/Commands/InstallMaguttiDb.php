@@ -35,6 +35,11 @@ class InstallMaguttiDb extends Command
 
 
     /**
+     * @var mixed
+     */
+    private mixed $app_name;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -42,7 +47,8 @@ class InstallMaguttiDb extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->db_name =env('DB_DATABASE');
+        $this->db_name = env('DB_DATABASE');
+        $this->app_name = env('APP_NAME');
     }
 
     /**
@@ -53,7 +59,16 @@ class InstallMaguttiDb extends Command
     public function handle()
     {
 
+        $seed_file_path = $this->getSeedPath();
+
         if (! $this->confirmToProceed()) {
+            return 1;
+        }
+
+        if (!file_exists($seed_file_path)) {
+            $this->line('');
+            $this->error($this->seed_file . ' file non found');
+            $this->line('');
             return 1;
         }
 
@@ -64,24 +79,26 @@ class InstallMaguttiDb extends Command
             }
         }
 
-        $seed_file = $this->getSeedPath();
-
         $this->info("Reading [$this->seed_file] file....");
+        //import db
+        DB::unprepared(file_get_contents($seed_file_path));
 
-        DB::unprepared(file_get_contents($seed_file));
-
-        $this->info('maguttiCms db installed successfully!');
-
-        $this->info("");
+        $this->line("");
+        $this->warn($this->app_name . ' db installed successfully!');
+        return 1;
 
     }
 
-    function checkIfDbIsAlreadyInstalled(){
-        // check if users table already exists
+    /**
+     * @return bool
+     */
+    function checkIfDbIsAlreadyInstalled(): bool{
+
         return \Schema::hasTable('users');
     }
 
-    function getSeedPath(){
+    function getSeedPath(): string
+    {
         return __dir__ . '/../../../db/'.$this->seed_file;
     }
 }
